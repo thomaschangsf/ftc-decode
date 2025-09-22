@@ -201,11 +201,21 @@ public class Field1 extends LinearOpMode {
     // Describe this function...
     public void displayVisionPortalData(){
         myAprilTagDetections = (myApriltagProcessor.getDetections());
+        // TWC: refer to RobotAutoDriveToAprilTagTank.java and *Omni to see how to use this
+        // Omni are for robots that have 4 wheels, while Tank are for robots with 2 wheels
         for (AprilTagDetection myAprilTagDetection2 : myAprilTagDetections) {
+            //https://ftc-docs.firstinspires.org/en/latest/apriltag/understanding_apriltag_detection_values/understanding-apriltag-detection-values.html#understanding-apriltag-detection-values
             myAprilTagDetection = myAprilTagDetection2;
             telemetry.addData("ID", (myAprilTagDetection.id));
+            //Roll is the measure of rotation about the Y axis
             telemetry.addData("Range", (myAprilTagDetection.ftcPose.range));
+            //Heading, or Yaw, is the measure of rotation about the Z axis
             telemetry.addData("Yaw", (myAprilTagDetection.ftcPose.yaw));
+            //Pitch is the measure of rotation about the X axis
+            telemetry.addData("Pitch", (myAprilTagDetection.ftcPose.pitch));
+            telemetry.addData("X", (myAprilTagDetection.ftcPose.x));
+            telemetry.addData("Y", (myAprilTagDetection.ftcPose.y));
+            telemetry.addData("Z", (myAprilTagDetection.ftcPose.z));
         }
         telemetry.update();
     }
