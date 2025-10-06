@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -28,8 +29,15 @@ public class Field1 extends LinearOpMode {
     DcMotor frontRightDrive;
     Servo artifactstopper;
     ColorSensor color1;
+    ColorSensor color2;
     DistanceSensor distance1;
     BNO055IMU imu;
+    
+    // Additional motor variables for test method
+    DcMotor motorLeft;
+    DcMotor motorRight;
+    DcMotor frontLeft;
+    DcMotor frontRight;
 
     // Properly declared variables with correct types
     int duration;
@@ -62,12 +70,13 @@ public class Field1 extends LinearOpMode {
 
     // Describe this function...
     public void initializeVisionPortal(){
-        myVisionPortalBuilder = new VisionPortal.Builder();
-        myVisionPortal = (myVisionPortalBuilder.build());
-        myVisionPortalBuilder.setCamera(hardwareMap.get(WebcamName.class, "webcam"));
         myAprilTagProcessorBuilder = new AprilTagProcessor.Builder();
-        myApriltagProcessor = (myAprilTagProcessorBuilder.build());
+        myApriltagProcessor = myAprilTagProcessorBuilder.build();
+        
+        myVisionPortalBuilder = new VisionPortal.Builder();
+        myVisionPortalBuilder.setCamera(hardwareMap.get(WebcamName.class, "webcam"));
         myVisionPortalBuilder.addProcessor(myApriltagProcessor);
+        myVisionPortal = myVisionPortalBuilder.build();
     }
 
     // Describe this function...
@@ -196,6 +205,23 @@ public class Field1 extends LinearOpMode {
         sleep(1500);
         // Allow for a new shot to be triggered
         isShooting = false;
+    }
+
+    public void test() {
+        motorLeft = hardwareMap.get(DcMotor.class, "motorLeft");
+        motorRight = hardwareMap.get(DcMotor.class, "motorRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        color1 = hardwareMap.get(ColorSensor.class, "color1");
+        color2 = hardwareMap.get(ColorSensor.class, "color2");
+        distance1 = hardwareMap.get(DistanceSensor.class, "distance1");
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        // Put initialization blocks here
+        waitForStart();
+
+        NormalizedColorSensor colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
+
+
     }
 
     // Describe this function...
