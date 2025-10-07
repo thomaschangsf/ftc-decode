@@ -1,4 +1,5 @@
 package org.ftsim.elmo;
+package org.ftsim.elmo;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -15,12 +16,14 @@ public class Motor1 extends LinearOpMode {
         motor = hardwareMap.get(DcMotor.class, "motor");
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        
+
         // Wait for the start button to be pressed
         waitForStart();
-        
+
         // Run the motor for 3 seconds
         motor.setPower(1);
     }
 }
 // This is  a test
+public class Motor2 {
+}
