@@ -1,29 +1,22 @@
 package org.ftsim.elmo;
-package org.ftsim.elmo;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-// Teleop mode tells program where to find in the Driver station under the teleop tab
-// Autonomous mode tells program where to find in the Driver station app
-@Autonomous(name="Motor1", group="ftsim")
-public class Motor1 extends LinearOpMode {
+@Autonomous(name="motor1")
+public class Motor2 extends OpMode
+{
     DcMotor motor;
 
     @Override
-    public void runOpMode() {
-        motor = hardwareMap.get(DcMotor.class, "motor");
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
-
-        // Wait for the start button to be pressed
-        waitForStart();
-
-        // Run the motor for 3 seconds
-        motor.setPower(1);
+    public void init() {
+        motor = hardwareMap.get(DcMotor.class, "motor1");
     }
-}
-// This is  a test
-public class Motor2 {
+
+
+    @Override
+    public void loop(){
+        motor.setPower(gamepad1.left_trigger);
+    }
 }
