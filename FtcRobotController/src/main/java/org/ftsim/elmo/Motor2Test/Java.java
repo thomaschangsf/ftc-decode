@@ -21,7 +21,7 @@ public class Java extends OpMode
         while(gamepad1.left_trigger > 0){
             motor.setPower(1);
         }
-        while(gamepad1.left_bumper == true){
+        while(gamepad1.left_bumper){
             motor.setPower(-1);
         }
     }

@@ -39,10 +39,10 @@ public class TeleOp1 extends OpMode {
         }
         
         // Motor control with triggers
-        if (gamepad1.left_trigger > 0.1) {
+        if (gamepad1.left_trigger < 0.1) {
             leftMotor.setPower(gamepad1.left_trigger);
         }
-        if (gamepad1.right_trigger > 0.1) {
+        if (gamepad1.left_bumper) {
             rightMotor.setPower(gamepad1.right_trigger);
         }
         
