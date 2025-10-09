@@ -8,11 +8,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @Autonomous(name="motor1")
 public class Motor2 extends OpMode
 {
-    DcMotor motor;
+    DcMotor motor1;
+    DcMotor motor2;
 
     @Override
     public void init() {
-        motor = hardwareMap.get(DcMotor.class, "motor1");
+        motor1 = hardwareMap.get(DcMotor.class, "motor1");
+        motor2 = hardwareMap.get(DcMotor.class, "motor2");
     }
 
 
