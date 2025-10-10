@@ -6,15 +6,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name="motor1")
+@Autonomous(name="motor2")
 public class Motor2 extends OpMode
 {
-    DcMotor motor1;
+    DcMotor motor;
     DcMotor motor2;
 
     @Override
     public void init() {
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
-        motor2 = hardwareMap.get(DcMotor.class, "motor2");
+
     }
 
 
@@ -22,8 +23,5 @@ public class Motor2 extends OpMode
     public void loop(){
         motor.setPower(gamepad1.left_trigger);
     }
-    public void loop(){
-        motor.setDirection(DcMotor.Direction.REVERSE);
-        motor.setPower(gamepad1.left_bumper);
     }
-}
+
