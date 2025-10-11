@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name="motor1")
-@Autonomous(name="motor2")
+r\\@Autonomous(name="motor2")
 public class Motor2 extends OpMode
 {
     DcMotor motor;
