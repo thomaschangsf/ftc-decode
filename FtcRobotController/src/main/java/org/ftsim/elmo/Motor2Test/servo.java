@@ -1,4 +1,4 @@
-package org.ftsim.elmo.Motor2Test;
+package org.ftsim.elmo.;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
