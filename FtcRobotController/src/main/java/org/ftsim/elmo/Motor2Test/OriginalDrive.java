@@ -1,13 +1,12 @@
 package org.ftsim.elmo;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous(name="total")
-public class TotalTeleop extends OpMode
+public class OriginalDrive extends OpMode
 {
     DcMotor motor1;
     DcMotor motor2;
