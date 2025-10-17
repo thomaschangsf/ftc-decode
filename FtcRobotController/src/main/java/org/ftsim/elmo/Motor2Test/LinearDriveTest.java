@@ -4,12 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range; // Import the Range utility
 
-@TeleOp(name="motor1")
-public class Drive extends OpMode
+@TeleOp(name="LinearDriveTest")
+public class LinearDriveTest extends OpMode
 {
-    DcMotor motor1;
-    DcMotor motor2;
+    DcMotor motor1; // Assuming this is the LEFT motor
+    DcMotor motor2; // Assuming this is the RIGHT motor
     DcMotor motor3;
     Servo leftShooterServo;
     Servo rightShooterServo;
@@ -27,39 +28,39 @@ public class Drive extends OpMode
         motor1.setPower(0);
         motor2.setPower(0);
     }
+
     @Override
     public void loop(){
+
+
+        double drive = -gamepad1.left_stick_y;
+        double turn  =  gamepad1.right_stick_x;
+
+        double leftPower  = drive + turn;
+        double rightPower = drive - turn;
+
+        leftPower  = Range.clip(leftPower, -1.0, 1.0);
+        rightPower = Range.clip(rightPower, -1.0, 1.0);
+
+        motor1.setPower(leftPower);
+        motor2.setPower(rightPower);
+
+
+        motor3.setPower(0);
+
         leftShooterServo.setPosition(0);
         rightShooterServo.setPosition(0);
-        motor3.setPower(0);
+
         if(gamepad1.circle) {
             leftShooterServo.setPosition(1);
             rightShooterServo.setPosition(1);
+            motor3.setPower(0);
         }
 
-        if(gamepad1.dpad_down){
+        if(gamepad1.dpad_down) {
             motor3.setPower(-1);
-            sleep(600);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
-            motor3.setPower(-1);
         }
-        if (gamepad1.left_trigger > 0.1) {
-            motor1.setPower(-1);
-        }
-        else if (gamepad1.left_bumper) {
-            motor1.setPower(1);
-        } else {
-            motor1.setPower(0);
-        }
-
-        if (gamepad1.right_trigger > 0.1) {
-            motor2.setPower(-1);
-        } else if (gamepad1.right_bumper) {
-            motor2.setPower(1);
-        } else {
-            motor2.setPower(0);
-        }
-
     }
 }

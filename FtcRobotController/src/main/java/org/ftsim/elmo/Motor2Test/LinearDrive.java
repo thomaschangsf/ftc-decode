@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name="motor1")
-public class Drive extends OpMode
+@TeleOp(name="LinearDrive")
+public class LinearDrive extends OpMode
 {
     DcMotor motor1;
     DcMotor motor2;
@@ -39,24 +39,29 @@ public class Drive extends OpMode
 
         if(gamepad1.dpad_down){
             motor3.setPower(-1);
-            sleep(600);
+            //sleep(600);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
             motor3.setPower(-1);
         }
-        if (gamepad1.left_trigger > 0.1) {
-            motor1.setPower(-1);
-        }
-        else if (gamepad1.left_bumper) {
+        if (gamepad1.left_stick_y > 0.1) {
             motor1.setPower(1);
+            motor2.setPower(1);
+        }
+        else if (gamepad1.left_stick_y < -0.1) {
+            motor1.setPower(-1);
+            motor2.setPower(-1);
         } else {
             motor1.setPower(0);
         }
 
-        if (gamepad1.right_trigger > 0.1) {
+        if (gamepad1.right_stick_x > 0.1) {
             motor2.setPower(-1);
-        } else if (gamepad1.right_bumper) {
+            motor1.setPower(1);
+
+        } else if (gamepad1.right_stick_x < -0.1) {
             motor2.setPower(1);
+            motor1.setPower(-1);
         } else {
             motor2.setPower(0);
         }
