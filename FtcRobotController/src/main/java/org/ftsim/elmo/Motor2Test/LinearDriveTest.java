@@ -1,13 +1,14 @@
-package org.ftsim.elmo.Motor2Test;
+package org.ftsim.elmo;
+
+
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range; // Import the Range utility
-
+import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="LinearDriveTest")
-public class LinearDriveTest extends OpMode
+public class LinearDriveTest extends LinearOpMode
 {
     DcMotor motor1; // Assuming this is the LEFT motor
     DcMotor motor2; // Assuming this is the RIGHT motor
@@ -17,7 +18,7 @@ public class LinearDriveTest extends OpMode
 
 
     @Override
-    public void init() {
+    public void runOpMode() {
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
         motor2 = hardwareMap.get(DcMotor.class, "motor2");
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
@@ -30,7 +31,7 @@ public class LinearDriveTest extends OpMode
     }
 
     @Override
-    public void loop(){
+    while(LinearOpModeIsActive()){
 
 
         double drive = -gamepad1.left_stick_y;
@@ -57,10 +58,14 @@ public class LinearDriveTest extends OpMode
             motor3.setPower(0);
         }
 
-        if(gamepad1.dpad_down) {
-            motor3.setPower(-1);
+        if(gamepad1.right_trigger > 0.1) {
+            motor3.setPower(-0.68);
+        }
+        if(gamepad1.left_trigger > 0.1) {
+            leftShooterServo.setPosition(1);
+            rightShooterServo.setPosition(-1);
+            sleep(1000);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
-        }
+        }}
     }
-}
