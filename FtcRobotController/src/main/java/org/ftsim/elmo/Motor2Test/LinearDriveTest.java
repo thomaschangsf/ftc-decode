@@ -46,21 +46,20 @@ public class LinearDriveTest extends OpMode
         motor2.setPower(rightPower);
 
 
-        motor3.setPower(0);
-
         leftShooterServo.setPosition(0.2);
         rightShooterServo.setPosition(0.2);
 
         if(gamepad1.circle) {
-            leftShooterServo.setPosition(0.0);
-            rightShooterServo.setPosition(0.0);
-            motor3.setPower(0);
+            leftShooterServo.setPosition(1);
+            rightShooterServo.setPosition(-1);
+        }
+        if(gamepad1.right_trigger > 0.1){
+            motor3.setPower(-0.68);
         }
 
-        if(gamepad1.dpad_down) {
-            motor3.setPower(-1);
-            leftShooterServo.setPosition(0.2);
-            rightShooterServo.setPosition(0.2);
+        if(gamepad1.left_trigger > 0.1) {
+            leftShooterServo.setPosition(0);
+            rightShooterServo.setPosition(0);
         }
     }
 }
