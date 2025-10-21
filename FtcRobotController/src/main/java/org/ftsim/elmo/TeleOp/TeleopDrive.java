@@ -1,4 +1,4 @@
-package org.ftsim.elmo.Motor2Test;
+package org.ftsim.elmo.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name="motor1")
-public class Drive extends OpMode
+public class TotalTeleOpV0 extends OpMode
 {
     DcMotor motor1;
     DcMotor motor2;

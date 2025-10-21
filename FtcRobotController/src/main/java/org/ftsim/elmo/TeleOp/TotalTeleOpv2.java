@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="LinearDriveTest")
-public class TotalTeleOp extends LinearOpMode
+public class TotalTeleOpv2 extends LinearOpMode
 {
     DcMotor motor1;
     DcMotor motor2;
@@ -48,11 +48,6 @@ public class TotalTeleOp extends LinearOpMode
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
 
-            if(gamepad1.circle) {
-                leftShooterServo.setPosition(1);
-                rightShooterServo.setPosition(1);
-                motor3.setPower(0);
-            }
 
             if(gamepad1.right_trigger > 0.1) {
                 motor3.setPower(-0.68);
@@ -61,9 +56,7 @@ public class TotalTeleOp extends LinearOpMode
             if(gamepad1.left_trigger > 0.1) {
                 leftShooterServo.setPosition(1);
                 rightShooterServo.setPosition(0);
-
                 sleep(1000);
-
                 leftShooterServo.setPosition(0);
                 rightShooterServo.setPosition(0);
             }

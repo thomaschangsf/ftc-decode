@@ -1,4 +1,4 @@
-package org.ftsim.elmo.Motor2Test;
+package org.ftsim.elmo.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range; // Import the Range utility
 
 @TeleOp(name="LinearDriveTest")
-public class LinearDriveTest extends OpMode
+public class TotalTeleOpv1 extends OpMode
 {
     DcMotor motor1; // Assuming this is the LEFT motor
     DcMotor motor2; // Assuming this is the RIGHT motor
