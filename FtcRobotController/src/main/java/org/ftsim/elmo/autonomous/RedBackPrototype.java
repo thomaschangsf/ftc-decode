@@ -1,12 +1,13 @@
 package org.ftsim.elmo;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="LinearDriveTest")
+@Autonomous(name="RedBackPrototype")
 public class RedBackPrototype extends LinearOpMode
 {
     DcMotor motor1;
@@ -40,7 +41,7 @@ public class RedBackPrototype extends LinearOpMode
         sleep(500);
         motor1.setPower(0);
         motor2.setPower(0);
-        motor3.setPower(-0.68);
+        motor3.setPower(-1.2);
         sleep(3000);
         for (int i = 0; i < 3; i++) {
             telemetry.addData("Loop Count", i + 1); // Add telemetry to track loops
