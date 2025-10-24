@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range; // Import the Range utility
 
-@TeleOp(name="LinearDriveTest")
+@TeleOp(name="TotalTeleOpV1")
 public class TotalTeleOpv1 extends OpMode
 {
     DcMotor motor1; // Assuming this is the LEFT motor
