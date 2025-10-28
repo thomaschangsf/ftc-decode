@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="TotalTeleOpv2", group="TeleOp")
-public class TotalTeleOpv2 extends LinearOpMode
+@TeleOp(name="TotalTeleOpv3", group="TeleOp")
+public class TotalTeleOpv3 extends LinearOpMode
 {
     DcMotor motor1;
     DcMotor motor2;
@@ -48,14 +48,16 @@ public class TotalTeleOpv2 extends LinearOpMode
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
 
-
-            if(gamepad1.right_trigger > 0.1) {
+            if(gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-0.68);
             }
-            else if(gamepad2.left_trigger < 0.1) {
-                motor3.setPower(0);
+            if(gamepad2.right_bumper) {
+                motor3.setPower(-1);
             }
-            if(gamepad1.left_trigger > 0.1) {
+            else{
+                motor3.setPower(0);
+                }
+            if(gamepad2.left_trigger > 0.1) {
                 leftShooterServo.setPosition(1);
                 rightShooterServo.setPosition(0);
                 sleep(300);

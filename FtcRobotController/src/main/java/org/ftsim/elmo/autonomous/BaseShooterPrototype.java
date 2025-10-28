@@ -33,7 +33,7 @@ public class BaseShooterPrototype extends LinearOpMode
             sleep(3000);
             leftShooterServo.setPosition(1);
             rightShooterServo.setPosition(-1);
-            sleep(1000);
+            sleep(250);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(1);
             sleep(500);
