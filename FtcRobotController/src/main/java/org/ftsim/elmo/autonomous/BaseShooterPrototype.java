@@ -1,11 +1,12 @@
 package org.ftsim.elmo;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name="BaseShooterPrototype", group="Linear Opmode")
+@Autonomous(name="BaseShooterPrototype", group="Linear Opmode")
 public class BaseShooterPrototype extends LinearOpMode
 {
     DcMotor motor3;
@@ -33,7 +34,7 @@ public class BaseShooterPrototype extends LinearOpMode
             sleep(3000);
             leftShooterServo.setPosition(1);
             rightShooterServo.setPosition(-1);
-            sleep(250);
+            sleep(1000);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(1);
             sleep(500);
