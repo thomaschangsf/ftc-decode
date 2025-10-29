@@ -1,4 +1,4 @@
-package org.ftsim.elmo.TeleOp;
+package org.ftsim.elmo;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
