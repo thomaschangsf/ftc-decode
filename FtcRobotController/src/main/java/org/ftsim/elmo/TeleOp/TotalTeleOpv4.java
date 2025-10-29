@@ -41,7 +41,7 @@ public class TotalTeleOpv4 extends LinearOpMode
             if(gamepad1.circleWasPressed()) {
                 leftPower = Range.clip(leftPower, -0.5, 0.5);
                 rightPower = Range.clip(rightPower, -0.5, 0.5);
-            } else if (gamepad1.squareWasPressed()) {
+            } else{
                 leftPower = Range.clip(leftPower, -1.0, 1.0);
                 rightPower = Range.clip(rightPower, -1.0, 1.0);
 
