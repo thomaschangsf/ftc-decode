@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="TotalTeleOpv4", group="TeleOp")
-public class TotalTeleOpv3 extends LinearOpMode
+@TeleOp(name="TotalTeleOpv5", group="TeleOp")
+public class TotalTeleOpv5 extends LinearOpMode
 {
     DcMotor motor1;
     DcMotor motor2;
@@ -38,9 +38,14 @@ public class TotalTeleOpv3 extends LinearOpMode
             double leftPower  = drive + turn;
             double rightPower = drive - turn;
 
-            leftPower  = Range.clip(leftPower, -1.0, 1.0);
-            rightPower = Range.clip(rightPower, -1.0, 1.0);
+            while(gamepad2.circle==true) {
+                leftPower = Range.clip(leftPower, -0.5, 0.5);
+                rightPower = Range.clip(rightPower, -0.5, 0.5);
+            } if(gamepad2.square==true){
+                leftPower = Range.clip(leftPower, -1.0, 1.0);
+                rightPower = Range.clip(rightPower, -1.0, 1.0);
 
+            }
             motor1.setPower(leftPower);
             motor2.setPower(rightPower);
 
@@ -49,12 +54,15 @@ public class TotalTeleOpv3 extends LinearOpMode
             rightShooterServo.setPosition(0);
 
             if(gamepad2.right_trigger > 0.1) {
-                motor3.setPower(-0.67);
+                motor3.setPower(-0.68);
+            }
+            if(gamepad2.left_trigger > 0.1) {
+                motor3.setPower(-1);
             }
             else{
                 motor3.setPower(0);
             }
-            if(gamepad2.left_trigger > 0.1) {
+            if(gamepad2.circle) {
                 leftShooterServo.setPosition(-1);
                 rightShooterServo.setPosition(1);
                 sleep(300);

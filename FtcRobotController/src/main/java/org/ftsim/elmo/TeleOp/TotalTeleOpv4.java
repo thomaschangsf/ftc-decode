@@ -38,10 +38,10 @@ public class TotalTeleOpv4 extends LinearOpMode
             double leftPower  = drive + turn;
             double rightPower = drive - turn;
 
-            if(gamepad1.circleWasPressed()) {
+            while(gamepad2.circle==true) {
                 leftPower = Range.clip(leftPower, -0.5, 0.5);
                 rightPower = Range.clip(rightPower, -0.5, 0.5);
-            } else{
+            } if(gamepad2.square==true){
                 leftPower = Range.clip(leftPower, -1.0, 1.0);
                 rightPower = Range.clip(rightPower, -1.0, 1.0);
 
@@ -56,15 +56,12 @@ public class TotalTeleOpv4 extends LinearOpMode
             if(gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-0.68);
             }
-            if(gamepad2.right_bumper) {
-                motor3.setPower(-1);
-            }
             else{
                 motor3.setPower(0);
             }
             if(gamepad2.left_trigger > 0.1) {
-                leftShooterServo.setPosition(1);
-                rightShooterServo.setPosition(0);
+                leftShooterServo.setPosition(-1);
+                rightShooterServo.setPosition(1);
                 sleep(300);
                 leftShooterServo.setPosition(0);
                 rightShooterServo.setPosition(0);
