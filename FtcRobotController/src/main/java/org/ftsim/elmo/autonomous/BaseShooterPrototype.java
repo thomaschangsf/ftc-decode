@@ -30,11 +30,11 @@ public class BaseShooterPrototype extends LinearOpMode
         for (int i = 0; i < 3; i++) {
             telemetry.addData("Loop Count", i + 1); // Add telemetry to track loops
             telemetry.update();
-            motor3.setPower(-0.58);
+            motor3.setPower(-0.44);
             sleep(3000);
             leftShooterServo.setPosition(1);
             rightShooterServo.setPosition(-1);
-            sleep(250);
+            sleep(1000);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(1);
             sleep(500);
