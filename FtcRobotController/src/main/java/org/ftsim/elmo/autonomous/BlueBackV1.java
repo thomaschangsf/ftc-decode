@@ -33,15 +33,15 @@ public class BlueBackV1 extends LinearOpMode
         motor3.setPower(0);
         motor1.setPower(1);
         motor2.setPower(1);
-        sleep(650);
+        sleep(1750);
         motor1.setPower(-1);
         motor2.setPower(1);
-        sleep(900);//Turn right
+        sleep(600);//Turn right
         motor1.setPower(1);
-        sleep(300);
+        sleep(100);
         motor1.setPower(0);
         motor2.setPower(0);
-        motor3.setPower(-1.2);
+        motor3.setPower(-0.85);
         sleep(7000);
         for (int i = 0; i < 3; i++) {
             telemetry.addData("Loop Count", i + 1); // Add telemetry to track loops
