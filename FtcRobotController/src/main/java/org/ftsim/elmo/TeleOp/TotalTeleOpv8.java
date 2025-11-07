@@ -6,14 +6,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="TotalTeleOpv7", group="TeleOp")
-public class TotalTeleOpv7 extends LinearOpMode
+@TeleOp(name="TotalTeleOpv8", group="TeleOp")
+public class TotalTeleOpv8 extends LinearOpMode
 {
     DcMotor motor1;
     DcMotor motor2;
     DcMotor motor3;
-    DcMotor motor4;
-    DcMotor motor5;
     Servo leftShooterServo;
     Servo rightShooterServo;
 
@@ -23,8 +21,6 @@ public class TotalTeleOpv7 extends LinearOpMode
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
         motor2 = hardwareMap.get(DcMotor.class, "motor2");
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
-        motor4 = hardwareMap.get(DcMotor.class, "motor4");
-        motor5 = hardwareMap.get(DcMotor.class,"motor5");
         leftShooterServo = hardwareMap.get(Servo.class, "leftShooterServo");
         rightShooterServo = hardwareMap.get(Servo.class, "rightShooterServo");
         telemetry.addData("Status", "Initialized and Ready");
@@ -49,24 +45,9 @@ public class TotalTeleOpv7 extends LinearOpMode
                 leftPower = Range.clip(leftPower, -1.0, 1.0);
                 rightPower = Range.clip(rightPower, -1.0, 1.0);
             }
-            if(gamepad1.right_stick_x > 0.1 && gamepad1.left_stick_x > 0.1){
-                motor1.setPower(1);
-                motor3.setPower(-1);
-                motor2.setPower(1);
-                motor3.setPower(-1);
-            }
-            if(gamepad1.right_stick_x < -0.1 && gamepad1.left_stick_x < -0.1){
-                motor1.setPower(-1);
-                motor3.setPower(1);
-                motor2.setPower(-1);
-                motor3.setPower(1);
-            }
-            else {
-                motor1.setPower(leftPower);
-                motor2.setPower(rightPower);
-                motor4.setPower(leftPower);
-                motor5.setPower(rightPower);
-            }
+            motor1.setPower(leftPower);
+            motor2.setPower(rightPower);
+
             motor3.setPower(0);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
@@ -75,6 +56,13 @@ public class TotalTeleOpv7 extends LinearOpMode
                 motor3.setPower(-0.67);
             }
             else{
+                motor3.setPower(0);
+            }
+            if(gamepad2.right_bumper){
+                motor3.setPower(0.6);
+                sleep(1200);
+                leftShooterServo.setPosition(-1);
+                rightShooterServo.setPosition(1);
                 motor3.setPower(0);
             }
             if(gamepad2.left_trigger > 0.1) {
