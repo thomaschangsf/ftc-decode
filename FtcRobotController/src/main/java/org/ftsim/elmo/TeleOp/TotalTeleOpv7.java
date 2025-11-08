@@ -50,16 +50,16 @@ public class TotalTeleOpv7 extends LinearOpMode
                 rightPower = Range.clip(rightPower, -1.0, 1.0);
             }
             if(gamepad1.right_stick_x > 0.1 && gamepad1.left_stick_x > 0.1){
-                motor1.setPower(1);
-                motor3.setPower(-1);
+                motor1.setPower(-1);
+                motor4.setPower(1);
                 motor2.setPower(1);
-                motor3.setPower(-1);
+                motor5.setPower(-1);
             }
             if(gamepad1.right_stick_x < -0.1 && gamepad1.left_stick_x < -0.1){
                 motor1.setPower(-1);
-                motor3.setPower(1);
-                motor2.setPower(-1);
-                motor3.setPower(1);
+                motor4.setPower(1);
+                motor2.setPower(1);
+                motor5.setPower(-1);
             }
             else {
                 motor1.setPower(leftPower);
