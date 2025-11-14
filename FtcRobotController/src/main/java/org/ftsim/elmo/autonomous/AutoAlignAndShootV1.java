@@ -13,7 +13,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import java.util.List;
 
 @Autonomous(name="Robust Align & Shoot", group="ftsim")
-public class RobustAlignAndShoot extends LinearOpMode {
+public class AutoAlignAndShootV1 extends LinearOpMode {
     // Hardware
     DcMotor leftDrive, rightDrive, shootwheel;
     Servo artifactstopper;
