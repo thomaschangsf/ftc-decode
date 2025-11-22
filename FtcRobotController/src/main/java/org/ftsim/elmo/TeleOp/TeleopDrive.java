@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name="motor1")
-public class TeleOpDrive extends OpMode
+public class TeleopDrive extends OpMode
 {
     DcMotor motor1;
     DcMotor motor2;
