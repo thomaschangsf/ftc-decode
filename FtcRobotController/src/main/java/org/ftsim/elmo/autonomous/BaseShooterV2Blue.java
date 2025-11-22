@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="BaseShooterV1", group="Linear Opmode")
+@Autonomous(name="BaseShooterV2Blue", group="Linear Opmode")
 public class BaseShooterV2Blue extends LinearOpMode
 {
     DcMotor motor1;
