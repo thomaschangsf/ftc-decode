@@ -58,7 +58,7 @@ public class TotalTeleOpv10 extends LinearOpMode
                 motor3.setPower(-0.69);
             }
             if(gamepad2.circle){
-                motor4.setPower(-1);
+                motor4.setPower(1.5);
             }
             else{
                 motor3.setPower(0);
