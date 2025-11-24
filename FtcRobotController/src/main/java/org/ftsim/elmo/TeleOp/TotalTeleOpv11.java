@@ -100,7 +100,7 @@ public class TotalTeleOpv11 extends LinearOpMode
                 motor4.setPower(1.5);
             }
 
-            else(){
+            else{
                 motor3.setPower(0);
                 motor4.setPower(0);
             }
