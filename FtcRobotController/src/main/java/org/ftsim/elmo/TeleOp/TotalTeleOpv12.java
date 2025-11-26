@@ -61,18 +61,14 @@ public class TotalTeleOpv12 extends LinearOpMode {
                 motor3.setPower(-getDistanceBasedShootPower());
             }
 
-            if (gamepad2.right_bumper) {
+            if (gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-getDistanceBasedShootPower());
-                leftShooterServo.setPosition(-1);
-                rightShooterServo.setPosition(1);
-                leftShooterServo.setPosition(0);
-                rightShooterServo.setPosition(0);
             }
 
             if (gamepad2.left_trigger > 0.1) {
                 leftShooterServo.setPosition(1);
                 rightShooterServo.setPosition(0);
-                sleep(300);
+                sleep(400);
                 leftShooterServo.setPosition(0);
                 rightShooterServo.setPosition(0);
             }
