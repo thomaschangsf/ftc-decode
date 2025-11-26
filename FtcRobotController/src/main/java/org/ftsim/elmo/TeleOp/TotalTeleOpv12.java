@@ -50,19 +50,19 @@ public class TotalTeleOpv12 extends LinearOpMode {
             double turn = gamepad1.right_stick_x + getTagTurnCorrection();
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
-            leftDrive.setPower(Range.clip(drive + turn, -maxPower, maxPower));
-            rightDrive.setPower(Range.clip(drive - turn, -maxPower, maxPower));
+            motor1.setPower(Range.clip(drive + turn, -maxPower, maxPower));
+            motor2.setPower(Range.clip(drive - turn, -maxPower, maxPower));
 
-            shooterMotor.setPower(0);
+            motor3.setPower(0);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
 
             if (gamepad2.right_trigger > 0.1) {
-                shooterMotor.setPower(-getDistanceBasedShootPower());
+                motor3.setPower(-getDistanceBasedShootPower());
             }
 
             if (gamepad2.right_bumper) {
-                shooterMotor.setPower(-getDistanceBasedShootPower());
+                motor3.setPower(-getDistanceBasedShootPower());
                 leftShooterServo.setPosition(-1);
                 rightShooterServo.setPosition(1);
                 leftShooterServo.setPosition(0);
@@ -77,7 +77,7 @@ public class TotalTeleOpv12 extends LinearOpMode {
                 rightShooterServo.setPosition(0);
             }
 
-            intakeMotor.setPower(gamepad2.circle ? 1.0 : 0);
+            motor4.setPower(gamepad2.circle ? 1.0 : 0);
 
             updateVisionTelemetry();
             telemetry.update();
