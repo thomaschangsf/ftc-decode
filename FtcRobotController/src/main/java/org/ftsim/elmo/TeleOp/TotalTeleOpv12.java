@@ -64,6 +64,9 @@ public class TotalTeleOpv12 extends LinearOpMode {
             if (gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-getDistanceBasedShootPower());
             }
+            if (gamepad2.square){
+                motor4.setPower(-1.5);
+            }
 
             if (gamepad2.left_trigger > 0.1) {
                 leftShooterServo.setPosition(1);
@@ -73,7 +76,9 @@ public class TotalTeleOpv12 extends LinearOpMode {
                 rightShooterServo.setPosition(0);
             }
 
-            motor4.setPower(gamepad2.circle ? 1.0 : 0);
+            if(gamepad2.circle){
+                motor4.setPower(1.5);
+            }
 
             updateVisionTelemetry();
             telemetry.update();
@@ -83,6 +88,7 @@ public class TotalTeleOpv12 extends LinearOpMode {
     private void initHuskyLens() {
         try {
             huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
+            huskyLens.selectAlgorithm(HuskyLens.Algorithm.TAG_RECOGNITION);
             huskyLens.selectAlgorithm(HuskyLens.Algorithm.TAG_RECOGNITION);
         } catch (Exception e) {
             huskyLens = null;
