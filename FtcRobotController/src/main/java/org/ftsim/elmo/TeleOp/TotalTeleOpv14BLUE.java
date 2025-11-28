@@ -146,4 +146,3 @@ public class TotalTeleOpv14BLUE extends LinearOpMode {
         }
     }
 }
-
