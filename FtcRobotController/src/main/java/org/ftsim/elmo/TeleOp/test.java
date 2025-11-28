@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv14_Red", group = "TeleOp")
-public class TotalTeleOpv14_Red extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv12", group = "TeleOp")
+public class TotalTeleOpv12 extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.9;
@@ -16,7 +16,6 @@ public class TotalTeleOpv14_Red extends LinearOpMode {
     private static final double PIXELS_FAR = 40.0;
     private static final double DEFAULT_SHOOT_POWER = 0.69;
 
-    private static final int REQUIRED_TAG_ID = 3;
     private static final int TARGET_TAG_ID = -1; 
     private static final double TURN_GAIN = 0.003;
     private static final int FRAME_CENTER_X = 160;
@@ -42,7 +41,6 @@ public class TotalTeleOpv14_Red extends LinearOpMode {
         initHuskyLens();
 
         telemetry.addData("Status", "Initialized");
-        telemetry.addData("Shoot Tag ID", REQUIRED_TAG_ID);
         telemetry.update();
 
         waitForStart();
@@ -59,11 +57,11 @@ public class TotalTeleOpv14_Red extends LinearOpMode {
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
 
-            if (gamepad2.right_trigger > 0.1 && canShoot()) {
+            if (gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-getDistanceBasedShootPower());
             }
 
-            if (gamepad2.right_bumper && canShoot()) {
+            if (gamepad2.right_bumper) {
                 motor3.setPower(-getDistanceBasedShootPower());
                 leftShooterServo.setPosition(-1);
                 rightShooterServo.setPosition(1);
@@ -109,11 +107,6 @@ public class TotalTeleOpv14_Red extends LinearOpMode {
         return blocks[0];
     }
 
-    private boolean canShoot() {
-        HuskyLens.Block block = getTrackedTag();
-        return block != null && block.id == REQUIRED_TAG_ID;
-    }
-
     private double getTagTurnCorrection() {
         HuskyLens.Block block = getTrackedTag();
         if (block == null) return 0.0;
@@ -133,16 +126,13 @@ public class TotalTeleOpv14_Red extends LinearOpMode {
         if (block == null) {
             telemetry.addData("Tag", "None");
             telemetry.addData("Shoot Power", "%.2f", DEFAULT_SHOOT_POWER);
-            telemetry.addData("Can Shoot", "No - No tag");
         } else {
             double power = getDistanceBasedShootPower();
             double turn = getTagTurnCorrection();
-            boolean canShoot = canShoot();
             telemetry.addData("Tag ID", block.id);
             telemetry.addData("Size", "%dx%d", block.width, block.height);
             telemetry.addData("Shoot Power", "%.2f", power);
             telemetry.addData("Turn Assist", "%.3f", turn);
-            telemetry.addData("Can Shoot", canShoot ? "Yes (ID " + REQUIRED_TAG_ID + ")" : "No (Need ID " + REQUIRED_TAG_ID + ")");
         }
     }
 }
