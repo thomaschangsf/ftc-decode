@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv14-Blue", group = "TeleOp")
-public class TotalTeleOpv14BLUE extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv15RED", group = "TeleOp")
+public class TotalTeleOpv15RED extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.9;
@@ -16,7 +16,7 @@ public class TotalTeleOpv14BLUE extends LinearOpMode {
     private static final double PIXELS_FAR = 40.0;
     private static final double DEFAULT_SHOOT_POWER = 0.69;
 
-    private static final int REQUIRED_TAG_ID = 6;
+    private static final int REQUIRED_TAG_ID = 3;
     private static final int TARGET_TAG_ID = -1; 
     private static final double TURN_GAIN = 0.003;
     private static final int FRAME_CENTER_X = 160;
@@ -59,7 +59,7 @@ public class TotalTeleOpv14BLUE extends LinearOpMode {
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(0);
 
-            if (gamepad2.right_trigger > 0.1 && canShoot()) {
+            if (gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-getDistanceBasedShootPower());
             }
 
@@ -125,7 +125,7 @@ public class TotalTeleOpv14BLUE extends LinearOpMode {
         if (block == null) {
             telemetry.addData("Tag", "None");
             telemetry.addData("Shoot Power", "%.2f", DEFAULT_SHOOT_POWER);
-            telemetry.addData("Can Shoot", "No - No tag");
+            telemetry.addData("Can Shoot", "Yes - No tag required");
         } else {
             double power = getDistanceBasedShootPower();
             double turn = getTagTurnCorrection();
@@ -134,7 +134,8 @@ public class TotalTeleOpv14BLUE extends LinearOpMode {
             telemetry.addData("Size", "%dx%d", block.width, block.height);
             telemetry.addData("Shoot Power", "%.2f", power);
             telemetry.addData("Turn Assist", "%.3f", turn);
-            telemetry.addData("Can Shoot", canShoot ? "Yes (ID " + REQUIRED_TAG_ID + ")" : "No (Need ID " + REQUIRED_TAG_ID + ")");
+            telemetry.addData("Can Shoot", canShoot ? "Yes (ID " + REQUIRED_TAG_ID + ")" : "Yes - No tag required");
         }
     }
 }
+
