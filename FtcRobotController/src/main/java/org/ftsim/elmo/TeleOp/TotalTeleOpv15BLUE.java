@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv15-Blue", group = "TeleOp")
+@TeleOp(name = "TotalTeleOpv15BLUE", group = "TeleOp")
 public class TotalTeleOpv15BLUE extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
