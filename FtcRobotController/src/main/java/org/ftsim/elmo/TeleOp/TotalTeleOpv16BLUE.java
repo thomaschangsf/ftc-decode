@@ -66,6 +66,7 @@ public class TotalTeleOpv16BLUE extends LinearOpMode {
             }
 
             if (gamepad2.left_trigger > 0.1) {
+                while(motor3 = -getDistanceBasedShootPower()) {
                 for (int i = 0; i < 3; i++) {
                     leftShooterServo.setPosition(1);
                     rightShooterServo.setPosition(0);
@@ -74,6 +75,8 @@ public class TotalTeleOpv16BLUE extends LinearOpMode {
                     rightShooterServo.setPosition(1);
                     sleep(1000);
                 }
+                }
+            }
             }
 
             motor4.setPower(gamepad2.circle ? 1.0 : 0);
