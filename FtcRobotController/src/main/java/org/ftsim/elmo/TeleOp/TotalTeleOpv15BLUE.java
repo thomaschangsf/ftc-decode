@@ -24,7 +24,6 @@ public class TotalTeleOpv15BLUE extends LinearOpMode {
     private DcMotor motor1;
     private DcMotor motor2;
     private DcMotor motor3;
-    private DcMotor motor4;
     private Servo leftShooterServo;
     private Servo rightShooterServo;
 
@@ -35,7 +34,6 @@ public class TotalTeleOpv15BLUE extends LinearOpMode {
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
         motor2 = hardwareMap.get(DcMotor.class, "motor2");
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
-        motor4 = hardwareMap.get(DcMotor.class, "motor4");
         leftShooterServo = hardwareMap.get(Servo.class, "leftShooterServo");
         rightShooterServo = hardwareMap.get(Servo.class, "rightShooterServo");
 
@@ -57,7 +55,7 @@ public class TotalTeleOpv15BLUE extends LinearOpMode {
 
             motor3.setPower(0);
             leftShooterServo.setPosition(0);
-            rightShooterServo.setPosition(0);
+            rightShooterServo.setPosition(1);
 
             if (gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-getDistanceBasedShootPower());
@@ -66,12 +64,14 @@ public class TotalTeleOpv15BLUE extends LinearOpMode {
             if (gamepad2.left_trigger > 0.1) {
                 leftShooterServo.setPosition(1);
                 rightShooterServo.setPosition(0);
-                sleep(300);
+                sleep(600);
                 leftShooterServo.setPosition(0);
                 rightShooterServo.setPosition(0);
             }
 
-            motor4.setPower(gamepad2.circle ? 1.0 : 0);
+            if (gamepad2.square){
+                motor3.setPower(0.85);
+            }
 
             updateVisionTelemetry();
             telemetry.update();

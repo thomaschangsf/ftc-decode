@@ -3,7 +3,7 @@ package org.ftsim.elmo;
 
 import com.qualcomm.hardware.dfrobot.HuskyLens;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -57,7 +57,7 @@ public class RedBackV2 extends LinearOpMode {
 
        waitForStart();
        leftShooterServo.setPosition(0);
-       rightShooterServo.setPosition(0);
+       rightShooterServo.setPosition(1);
        motor3.setPower(0);
        motor1.setPower(1);
        motor2.setPower(1);
