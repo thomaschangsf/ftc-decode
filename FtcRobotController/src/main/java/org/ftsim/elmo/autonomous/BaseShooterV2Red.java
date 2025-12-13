@@ -27,7 +27,7 @@ public class BaseShooterV2Red extends LinearOpMode
 
         waitForStart();
         leftShooterServo.setPosition(0);
-        rightShooterServo.setPosition(0);
+        rightShooterServo.setPosition(1);
         motor3.setPower(0);
         motor3.setPower(-0.46);
         sleep(3000);

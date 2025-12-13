@@ -55,7 +55,7 @@ public class TotalTeleOpv15BLUE extends LinearOpMode {
 
             motor3.setPower(0);
             leftShooterServo.setPosition(0);
-            rightShooterServo.setPosition(0);
+            rightShooterServo.setPosition(1);
 
             if (gamepad2.right_trigger > 0.1) {
                 motor3.setPower(-getDistanceBasedShootPower());
