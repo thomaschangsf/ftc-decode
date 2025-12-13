@@ -11,14 +11,14 @@ import com.qualcomm.robotcore.util.Range;
 public class TotalTeleOpv16BLUE extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
-    private static final double MAX_SHOOT_POWER = 0.9;
+    private static final double MAX_SHOOT_POWER = 0.92;
     private static final double PIXELS_NEAR = 150.0;
     private static final double PIXELS_FAR = 40.0;
-    private static final double DEFAULT_SHOOT_POWER = 0.69;
+    private static final double DEFAULT_SHOOT_POWER = 0.6;
 
     private static final int REQUIRED_TAG_ID = 6;
     private static final int BLOCKED_TAG_ID = 3;
-    private static final int TARGET_TAG_ID = -1; 
+    private static final int TARGET_TAG_ID = -1;
     private static final double TURN_GAIN = 0.003;
     private static final int FRAME_CENTER_X = 160;
 
@@ -67,12 +67,12 @@ public class TotalTeleOpv16BLUE extends LinearOpMode {
 
             if (gamepad2.left_trigger > 0.1) {
                 for (int i = 0; i < 3; i++) {
-                leftShooterServo.setPosition(1);
-                rightShooterServo.setPosition(0);
-                sleep(300);
-                leftShooterServo.setPosition(0);
-                rightShooterServo.setPosition(0);
-                sleep(400);
+                    leftShooterServo.setPosition(1);
+                    rightShooterServo.setPosition(0);
+                    sleep(500);
+                    leftShooterServo.setPosition(0);
+                    rightShooterServo.setPosition(1);
+                    sleep(1000);
                 }
             }
 
@@ -96,7 +96,7 @@ public class TotalTeleOpv16BLUE extends LinearOpMode {
         if (huskyLens == null) return null;
         HuskyLens.Block[] blocks = huskyLens.blocks();
         if (blocks.length == 0) return null;
-        
+
         if (TARGET_TAG_ID >= 0) {
             for (HuskyLens.Block block : blocks) {
                 if (block.id == TARGET_TAG_ID) return block;
@@ -110,7 +110,7 @@ public class TotalTeleOpv16BLUE extends LinearOpMode {
         if (huskyLens == null) return false;
         HuskyLens.Block[] blocks = huskyLens.blocks();
         if (blocks.length == 0) return false;
-        
+
         for (HuskyLens.Block block : blocks) {
             if (block.id == BLOCKED_TAG_ID) return true;
         }
@@ -131,7 +131,7 @@ public class TotalTeleOpv16BLUE extends LinearOpMode {
     private double getDistanceBasedShootPower() {
         HuskyLens.Block block = getTrackedTag();
         if (block == null) return DEFAULT_SHOOT_POWER;
-        
+
         double ratio = (Range.clip(block.width, PIXELS_FAR, PIXELS_NEAR) - PIXELS_FAR) / (PIXELS_NEAR - PIXELS_FAR);
         return MIN_SHOOT_POWER + (1.0 - ratio) * (MAX_SHOOT_POWER - MIN_SHOOT_POWER);
     }
