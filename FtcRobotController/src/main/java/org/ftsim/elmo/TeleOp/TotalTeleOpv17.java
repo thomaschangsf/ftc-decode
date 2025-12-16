@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv16BLUE", group = "TeleOp")
-public class TotalTeleOpv16RED extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv17", group = "TeleOp")
+public class TotalTeleOpv17 extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.92;
@@ -51,8 +51,8 @@ public class TotalTeleOpv16RED extends LinearOpMode {
                 // BALL 1 1400 m;
                 //motor3.setPower(-1);
                 //sleep(200);
-                motor3.setPower(-0.65);
-                sleep(1000);
+                motor3.setPower(-0.66);
+                sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(350); //gives ball time to escape servo
@@ -60,8 +60,8 @@ public class TotalTeleOpv16RED extends LinearOpMode {
                 rightShooterServo.setPosition(1);
 
                 // BALL 2 1025ms
-                motor3.setPower(-0.66); //12.5 volts
-                sleep(1250);
+                motor3.setPower(-0.65); //12.6 volts
+                sleep(800);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(300); //gives ball time to escape servo
@@ -69,8 +69,8 @@ public class TotalTeleOpv16RED extends LinearOpMode {
                 rightShooterServo.setPosition(1);
 
                 // BALL 3 1325 ms
-                motor3.setPower(-0.67); //12.5 volts
-                sleep(1250);
+                motor3.setPower(-0.65); //12.6 volts
+                sleep(675);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
@@ -81,7 +81,7 @@ public class TotalTeleOpv16RED extends LinearOpMode {
                 motor3.setPower(0);
                 //motor3.setPower(-1);
                 //sleep(100);
-                //for (int i = 0; i < 3; i++) {
+                //To much power, shoots to high, to little, shoots to horizontal
 
 
                 // give ball to fly and flywhell to regain speed
