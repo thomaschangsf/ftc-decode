@@ -48,7 +48,7 @@ public class TotalTeleOpv17 extends LinearOpMode {
 
             //orignal loop time 9 secs
             if (gamepad2.right_trigger > 0.1) { //Shooting loop
-                // BALL 1 1350ms;
+                // BALL 1 1400 m;
                 //motor3.setPower(-1);
                 //sleep(200);
                 motor3.setPower(-0.66);
@@ -59,18 +59,18 @@ public class TotalTeleOpv17 extends LinearOpMode {
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                // BALL 2 1550ms
-                motor3.setPower(-0.66); //12.5 volts
-                sleep(1250);
+                // BALL 2 1025ms
+                motor3.setPower(-0.65); //12.6 volts
+                sleep(800);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(300); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                // BALL 3 1575 ms
-                motor3.setPower(-0.67); //12.5 volts
-                sleep(1250);
+                // BALL 3 1325 ms
+                motor3.setPower(-0.65); //12.6 volts
+                sleep(675);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
@@ -79,7 +79,6 @@ public class TotalTeleOpv17 extends LinearOpMode {
 
                 sleep(1200);
                 motor3.setPower(0);
-                //total time 4475ms
                 //motor3.setPower(-1);
                 //sleep(100);
                 //To much power, shoots to high, to little, shoots to horizontal
