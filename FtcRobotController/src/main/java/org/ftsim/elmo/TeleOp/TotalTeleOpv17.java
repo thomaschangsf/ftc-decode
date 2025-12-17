@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv16BLUE", group = "TeleOp")
-public class TotalTeleOpv16RED extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv17", group = "TeleOp")
+public class TotalTeleOpv17 extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.92;
@@ -48,7 +48,7 @@ public class TotalTeleOpv16RED extends LinearOpMode {
 
             //orignal loop time 9 secs
             if (gamepad2.right_trigger > 0.1) { //Shooting loop
-                // BALL 1 1400 m;
+                // BALL 1 1350ms;
                 //motor3.setPower(-1);
                 //sleep(200);
                 motor3.setPower(-0.65);
@@ -59,7 +59,7 @@ public class TotalTeleOpv16RED extends LinearOpMode {
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                // BALL 2 1025ms
+                // BALL 2 1550ms
                 motor3.setPower(-0.66); //12.5 volts
                 sleep(1250);
                 leftShooterServo.setPosition(1); //open to shoot
@@ -68,7 +68,7 @@ public class TotalTeleOpv16RED extends LinearOpMode {
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                // BALL 3 1325 ms
+                // BALL 3 1575 ms
                 motor3.setPower(-0.67); //12.5 volts
                 sleep(1250);
                 leftShooterServo.setPosition(1); //open to shoot
@@ -79,6 +79,7 @@ public class TotalTeleOpv16RED extends LinearOpMode {
 
                 sleep(1200);
                 motor3.setPower(0);
+                //total time 4475ms
                 //motor3.setPower(-1);
                 //sleep(100);
                 //for (int i = 0; i < 3; i++) {
