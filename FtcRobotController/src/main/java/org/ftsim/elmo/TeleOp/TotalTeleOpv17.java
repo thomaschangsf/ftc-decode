@@ -44,7 +44,7 @@ public class TotalTeleOpv17 extends LinearOpMode {
 
             motor3.setPower(0);
             leftShooterServo.setPosition(0);
-            rightShooterServo.setPosition(0);
+            rightShooterServo.setPosition(1);
 
             //orignal loop time 9 secs
             if (gamepad2.right_trigger > 0.1) { //Shooting loop
