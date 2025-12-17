@@ -51,8 +51,8 @@ public class TotalTeleOpv17 extends LinearOpMode {
                 // BALL 1 1350ms;
                 //motor3.setPower(-1);
                 //sleep(200);
-                motor3.setPower(-0.65);
-                sleep(1000);
+                motor3.setPower(-0.66);
+                sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(350); //gives ball time to escape servo
@@ -82,7 +82,7 @@ public class TotalTeleOpv17 extends LinearOpMode {
                 //total time 4475ms
                 //motor3.setPower(-1);
                 //sleep(100);
-                //for (int i = 0; i < 3; i++) {
+                //To much power, shoots to high, to little, shoots to horizontal
 
 
                 // give ball to fly and flywhell to regain speed
