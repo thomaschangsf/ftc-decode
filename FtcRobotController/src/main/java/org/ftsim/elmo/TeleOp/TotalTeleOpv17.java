@@ -51,7 +51,7 @@ public class TotalTeleOpv17 extends LinearOpMode {
                 // BALL 1 1400 m;
                 //motor3.setPower(-1);
                 //sleep(200);
-                motor3.setPower(-0.66);
+                motor3.setPower(-0.68);
                 sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
@@ -60,7 +60,7 @@ public class TotalTeleOpv17 extends LinearOpMode {
                 rightShooterServo.setPosition(1);
 
                 // BALL 2 1025ms
-                motor3.setPower(-0.65); //12.6 volts
+                motor3.setPower(-0.67); //12.6 volts
                 sleep(800);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
@@ -69,7 +69,7 @@ public class TotalTeleOpv17 extends LinearOpMode {
                 rightShooterServo.setPosition(1);
 
                 // BALL 3 1325 ms
-                motor3.setPower(-0.65); //12.6 volts
+                motor3.setPower(-0.67); //12.6 volts
                 sleep(675);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
