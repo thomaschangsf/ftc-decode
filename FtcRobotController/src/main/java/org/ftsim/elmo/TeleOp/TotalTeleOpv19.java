@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv18", group = "TeleOp")
-public class TotalTeleOpv18 extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv19", group = "TeleOp")
+public class TotalTeleOpv19 extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.92;
@@ -17,6 +17,7 @@ public class TotalTeleOpv18 extends LinearOpMode {
     private DcMotor motor2;
     private DcMotor motor3;
     private DcMotor motor4;
+    private DcMotor motor5;
     private Servo leftShooterServo;
     private Servo rightShooterServo;
 
@@ -26,6 +27,7 @@ public class TotalTeleOpv18 extends LinearOpMode {
         motor2 = hardwareMap.get(DcMotor.class, "motor2");
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
         motor4 = hardwareMap.get(DcMotor.class, "motor4");
+        motor5 = hardwareMap.get(DcMotor.class, "motor5");
         leftShooterServo = hardwareMap.get(Servo.class, "leftShooterServo");
         rightShooterServo = hardwareMap.get(Servo.class, "rightShooterServo");
 
@@ -46,12 +48,30 @@ public class TotalTeleOpv18 extends LinearOpMode {
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(1);
 
+            if(gamepad1.right_bumper){
+                motor1.setPower(-0.5);
+                motor5.setPower(0.5)
+                motor2.setPower(-0.5);
+                motor4.setPower(0.5);
+            }  
+
+            if(gamepad1.left_bumper){
+                motor1.setPower(0.5);
+                motor5.setPower(-0.5);
+                motor2.setPower(0.5);
+                motor4.setPower(-0.5);
+            }
+
             //orignal loop time 9 secs
-            if (gamepad2.right_trigger > 0.1) { //Shooting loop
+            if (gamepad1.right_trigger > 0.1) { //Shooting loop
                 // BALL 1 1250 m;
                 //motor3.setPower(-1);
                 //sleep(200);
                 motor3.setPower(-0.68);
+            else {
+                motor4.setPower(0);
+                motor5.setPower(0);
+            }
                 sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
@@ -93,7 +113,7 @@ public class TotalTeleOpv18 extends LinearOpMode {
 
             }
 
-            if (gamepad2.left_trigger > 0.1){
+            if (gamepad.left_trigger > 0.1){
                 // BALL 1 1400 m;
                 //motor3.setPower(-1);
                 //sleep(200);
