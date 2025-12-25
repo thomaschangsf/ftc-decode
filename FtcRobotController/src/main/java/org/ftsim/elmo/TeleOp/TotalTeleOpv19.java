@@ -41,10 +41,9 @@ public class TotalTeleOpv19 extends LinearOpMode {
             double turn = gamepad1.right_stick_x;
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
-            motor1.setPower(Range.clip(drive + turn, -maxPower, maxPower));
-            motor2.setPower(Range.clip(drive - turn, -maxPower, maxPower));
-            motor5.setPower(Range.clip(drive - turn, -maxPower, maxPower));
-
+            double motor1Power = Range.clip(drive + turn, -maxPower, maxPower);
+            motor1.setPower(motor1Power);
+            motor2.setPower(Range.clip(motor1Power + 0.1, -maxPower, maxPower));
             //motor3.setPower(0);
             leftShooterServo.setPosition(0);
             rightShooterServo.setPosition(1);
@@ -52,14 +51,14 @@ public class TotalTeleOpv19 extends LinearOpMode {
             if(gamepad1.right_bumper){
                 motor1.setPower(-0.5);
                 motor5.setPower(0.5);
-                motor2.setPower(-0.5);
+                motor2.setPower(-0.4);
                 motor4.setPower(-0.5);
             }
 
             if(gamepad1.left_bumper){
                 motor1.setPower(0.5);
                 motor5.setPower(-0.5);
-                motor2.setPower(0.5);
+                motor2.setPower(0.6);
                 motor4.setPower(0.5);
             }
 
