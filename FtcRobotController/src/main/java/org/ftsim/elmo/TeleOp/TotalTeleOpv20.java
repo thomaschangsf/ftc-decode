@@ -6,28 +6,28 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv19", group = "TeleOp")
-public class TotalTeleOpv19 extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv20", group = "TeleOp")
+public class TotalTeleOpv20 extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.92;
     private static final double DEFAULT_SHOOT_POWER = 0.6;
 
-    private DcMotor motor1;
-    private DcMotor motor2;
+    private DcMotor motorlb;
+    private DcMotor motorrb;
     //private DcMotor motor3;
-    private DcMotor motor4;
-    private DcMotor motor5;
+    private DcMotor motorlf;
+    private DcMotor motorrf;
     private Servo leftShooterServo;
     private Servo rightShooterServo;
 
     @Override
     public void runOpMode() {
-        motor1 = hardwareMap.get(DcMotor.class, "motor1");
-        motor2 = hardwareMap.get(DcMotor.class, "motor2");
+        motorlb = hardwareMap.get(DcMotor.class, "motorlb");//motor1
+        motorrb = hardwareMap.get(DcMotor.class, "motorrb");//motor2
         //motor3 = hardwareMap.get(DcMotor.class, "motor3");
-        motor4 = hardwareMap.get(DcMotor.class, "motor4");
-        motor5 = hardwareMap.get(DcMotor.class, "motor5");
+        motorlf = hardwareMap.get(DcMotor.class, "motorlf");//motor4
+        motorrf = hardwareMap.get(DcMotor.class, "motorrf");//motor5
         leftShooterServo = hardwareMap.get(Servo.class, "leftShooterServo");
         rightShooterServo = hardwareMap.get(Servo.class, "rightShooterServo");
 
@@ -41,22 +41,22 @@ public class TotalTeleOpv19 extends LinearOpMode {
             double turn = gamepad1.right_stick_x;
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
-            motor1.setPower(Range.clip(drive + turn, -maxPower, maxPower));
-            motor2.setPower(Range.clip(drive - turn, -maxPower, maxPower));
-            motor2.setPower(Range.clip(drive - turn, -maxPower, maxPower));
+            motorlb.setPower(Range.clip(drive - turn, -maxPower, maxPower));
+            motorrb.setPower(Range.clip(drive - turn, -maxPower, maxPower));
+            motorrf.setPower(Range.clip(drive - turn, -maxPower, maxPower));
 
             if(gamepad1.right_bumper){
-                motor1.setPower(-0.5);
-                motor5.setPower(0.5);
-                motor2.setPower(-0.4);
-                motor4.setPower(-0.5);
+                motorlb.setPower(-0.5);
+                motorrf.setPower(0.5);
+                motorrb.setPower(-0.4);
+                motorlf.setPower(-0.5);
             }
 
             if(gamepad1.left_bumper){
-                motor1.setPower(0.5);
-                motor5.setPower(-0.5);
-                motor2.setPower(0.6);
-                motor4.setPower(0.5);
+                motorlb.setPower(0.5);
+                motorrf.setPower(-0.5);
+                motorrb.setPower(0.6);
+                motorlf.setPower(0.5);
             }
 
             //orignal loop time 9 secs
