@@ -9,9 +9,6 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name = "TotalTeleOpv22", group = "TeleOp")
 public class TotalTeleOpv22 extends LinearOpMode {
 
-    private static final double MIN_SHOOT_POWER = 0.3;
-    private static final double MAX_SHOOT_POWER = 0.92;
-    private static final double DEFAULT_SHOOT_POWER = 0.6;
 
     private DcMotor motorlb;
     private DcMotor motorrb;
@@ -37,22 +34,23 @@ public class TotalTeleOpv22 extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Get stick input values
-            // Left stick Y-axis: forward/backward movement for all motors (negative because stick forward gives negative values)
+
             double drive = -gamepad1.left_stick_y;
-            // Right stick X-axis: turning (positive = turn right, negative = turn left)
             double turn = gamepad1.right_stick_x;
 
-            // Speed limiting: hold right trigger to reduce max power to 0.5 (half speed)
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
-            // Calculate power for motorlb (left back motor): drive + turn for left side turning
             double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
             motorlb.setPower(motorlbPower);
+            
+            double rightPower;
+            if (Math.abs(turn) < 0.01 && Math.abs(motorlbPower) > 0.01) {
 
-            // motorrb and motorrf get 0.1 more power than motorlb
-            // Both right motors get the same power value (motorlb + 0.1) for synchronized movement
-            double rightPower = Range.clip(motorlbPower + 0.1, -maxPower, maxPower);
+                rightPower = Range.clip(motorlbPower + 0.1, -maxPower, maxPower);
+            } else {
+
+                rightPower = Range.clip(drive - turn, -maxPower, maxPower);
+            }
             motorrb.setPower(rightPower);
             motorrf.setPower(rightPower);
 
