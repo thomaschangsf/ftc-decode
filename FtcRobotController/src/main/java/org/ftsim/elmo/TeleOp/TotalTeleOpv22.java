@@ -42,11 +42,11 @@ public class TotalTeleOpv22 extends LinearOpMode {
 
             double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
             motorlb.setPower(motorlbPower);
-            
+
             double rightPower;
             if (Math.abs(turn) < 0.01 && Math.abs(motorlbPower) > 0.01) {
 
-                rightPower = Range.clip(motorlbPower + 0.1, -maxPower, maxPower);
+                rightPower = Range.clip(motorlbPower + 0.2, -maxPower, maxPower);
             } else {
 
                 rightPower = Range.clip(drive - turn, -maxPower, maxPower);
