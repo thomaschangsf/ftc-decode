@@ -42,14 +42,14 @@ public class TotalTeleOpv22 extends LinearOpMode {
             double drive = -gamepad1.left_stick_y;
             // Right stick X-axis: turning (positive = turn right, negative = turn left)
             double turn = gamepad1.right_stick_x;
-            
+
             // Speed limiting: hold right trigger to reduce max power to 0.5 (half speed)
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
             // Calculate power for motorlb (left back motor): drive + turn for left side turning
             double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
             motorlb.setPower(motorlbPower);
-            
+
             // motorrb and motorrf get 0.1 more power than motorlb
             // Both right motors get the same power value (motorlb + 0.1) for synchronized movement
             double rightPower = Range.clip(motorlbPower + 0.1, -maxPower, maxPower);
@@ -68,6 +68,13 @@ public class TotalTeleOpv22 extends LinearOpMode {
                 motorrf.setPower(0.5);
                 motorrb.setPower(-0.5);
                 motorlf.setPower(0.5);
+            }
+
+            else{
+                motorlb.setPower(0);
+                motorrf.setPower(0);
+                motorrb.setPower(0);
+                motorlf.setPower(0);
             }
 
             //orignal loop time 9 secs
