@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv21", group = "TeleOp")
-public class TotalTeleOpv21 extends LinearOpMode {
+@TeleOp(name = "TotalTeleOpv22", group = "TeleOp")
+public class TotalTeleOpv22 extends LinearOpMode {
 
     private static final double MIN_SHOOT_POWER = 0.3;
     private static final double MAX_SHOOT_POWER = 0.92;
@@ -37,21 +37,22 @@ public class TotalTeleOpv21 extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Get stick input values (Y-axis for forward/backward movement only)
-            // Negative because stick forward gives negative values, we want forward to be positive
-            double leftDrive = -gamepad1.left_stick_y;   // Left stick Y-axis controls motorlb
-            double rightDrive = -gamepad1.right_stick_y; // Right stick Y-axis controls motorrb and motorrf
+            // Get stick input values
+            // Left stick Y-axis: forward/backward movement for all motors (negative because stick forward gives negative values)
+            double drive = -gamepad1.left_stick_y;
+            // Right stick X-axis: turning (positive = turn right, negative = turn left)
+            double turn = gamepad1.right_stick_x;
             
             // Speed limiting: hold right trigger to reduce max power to 0.5 (half speed)
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
-            // Left stick Y-axis controls motorlb (forward/backward only)
-            // Clip to ensure power stays within safe range
-            motorlb.setPower(Range.clip(leftDrive, -maxPower, maxPower));
+            // Calculate power for motorlb (left back motor): drive + turn for left side turning
+            double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
+            motorlb.setPower(motorlbPower);
             
-            // Right stick Y-axis controls motorrb and motorrf (forward/backward only, both together)
-            // Both motors get the same power value for synchronized movement
-            double rightPower = Range.clip(rightDrive, -maxPower, maxPower);
+            // motorrb and motorrf get 0.1 more power than motorlb
+            // Both right motors get the same power value (motorlb + 0.1) for synchronized movement
+            double rightPower = Range.clip(motorlbPower + 0.1, -maxPower, maxPower);
             motorrb.setPower(rightPower);
             motorrf.setPower(rightPower);
 
@@ -65,7 +66,7 @@ public class TotalTeleOpv21 extends LinearOpMode {
             if(gamepad1.left_bumper){
                 motorlb.setPower(0.5);
                 motorrf.setPower(-0.5);
-                motorrb.setPower(0.5;
+                motorrb.setPower(0.5);
                 motorlf.setPower(0.5);
             }
 
