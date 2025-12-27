@@ -58,15 +58,15 @@ public class TotalTeleOpv22 extends LinearOpMode {
 
             if(gamepad1.right_bumper){
                 motorlb.setPower(-0.5);
-                motorrf.setPower(0.5);
-                motorrb.setPower(-0.5);
+                motorrf.setPower(-0.5);
+                motorrb.setPower(0.5);
                 motorlf.setPower(-0.5);
             }
 
             if(gamepad1.left_bumper){
                 motorlb.setPower(0.5);
-                motorrf.setPower(-0.5);
-                motorrb.setPower(0.5);
+                motorrf.setPower(0.5);
+                motorrb.setPower(-0.5);
                 motorlf.setPower(0.5);
             }
 
