@@ -55,6 +55,7 @@ public class TotalTeleOpv23 extends LinearOpMode {
             }
             motorrf.setPower(motorrfPower);
 
+            double motorlbPower;
             if (Math.abs(turn) > 0.01) {
                 motorlbPower = motorrbPower;
             } 
