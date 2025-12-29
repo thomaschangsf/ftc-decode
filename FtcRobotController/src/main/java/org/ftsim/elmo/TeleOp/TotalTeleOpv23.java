@@ -11,7 +11,7 @@ public class TotalTeleOpv23 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
 
-    private static final double MOTORLB_POWER_REDUCTION = 0.3;
+    private static final double MOTORLB_POWER_REDUCTION = 0.35;
 
     private DcMotor motorlb;
     private DcMotor motorrb;
@@ -58,14 +58,14 @@ public class TotalTeleOpv23 extends LinearOpMode {
             double motorlbPower;
             if (Math.abs(turn) > 0.01) {
                 motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
-            } 
+            }
             else if (Math.abs(drive) > 0.01) {
                 motorlbPower = Range.clip(motorrbPower - MOTORLB_POWER_REDUCTION, -maxPower, maxPower);
             } else {
                 motorlbPower = motorrbPower;
             }
             motorlb.setPower(motorlbPower);
-            
+
             double motorlfPower = Range.clip(drive + turn, -maxPower, maxPower);
             motorlf.setPower(-motorlfPower);
 
