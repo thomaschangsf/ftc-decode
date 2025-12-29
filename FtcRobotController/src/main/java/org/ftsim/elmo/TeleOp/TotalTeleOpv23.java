@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.util.Range;
 public class TotalTeleOpv23 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
+    
+    private static final double MOTORLB_POWER_REDUCTION = 0.2;
 
     private DcMotor motorlb;
     private DcMotor motorrb;
@@ -41,18 +43,22 @@ public class TotalTeleOpv23 extends LinearOpMode {
 
             double maxPower = gamepad1.right_trigger > 0.1 ? 0.5 : 1.0;
 
-            double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
-            motorlb.setPower(motorlbPower);
-            motorrb.setPower(motorlbPower);
-
+            double motorrbPower = Range.clip(drive - turn, -maxPower, maxPower);
+            motorrb.setPower(motorrbPower);
+            
             double motorrfPower;
-
             if (Math.abs(drive) > 0.01) {
-                motorrfPower = Range.clip(motorlbPower + (motorlbPower >= 0 ? MOTORRF_POWER_BOOST : -MOTORRF_POWER_BOOST), -maxPower, maxPower);
-            } else {
-                motorrfPower = 0;
+                motorrfPower = Range.clip(motorrbPower + (motorrbPower >= 0 ? MOTORRF_POWER_BOOST : -MOTORRF_POWER_BOOST), -maxPower, maxPower);
+            } 
+            else {
+                motorrfPower = motorrbPower;
             }
             motorrf.setPower(motorrfPower);
+            
+            double motorlbPower = Range.clip(motorrbPower - MOTORLB_POWER_REDUCTION, -maxPower, maxPower);
+            motorlb.setPower(motorlbPower);
+            double motorlfPower = Range.clip(drive + turn, -maxPower, maxPower);
+            motorlf.setPower(-motorlfPower);
 
             if(gamepad1.right_bumper){
                 motorlb.setPower(-0.5);
