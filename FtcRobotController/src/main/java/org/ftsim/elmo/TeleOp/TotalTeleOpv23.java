@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.Range;
 public class TotalTeleOpv23 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
-    
-    private static final double MOTORLB_POWER_REDUCTION = 0.2;
+
+    private static final double MOTORLB_POWER_REDUCTION = 0.3;
 
     private DcMotor motorlb;
     private DcMotor motorrb;
@@ -45,16 +45,16 @@ public class TotalTeleOpv23 extends LinearOpMode {
 
             double motorrbPower = Range.clip(drive - turn, -maxPower, maxPower);
             motorrb.setPower(motorrbPower);
-            
+
             double motorrfPower;
             if (Math.abs(drive) > 0.01) {
                 motorrfPower = Range.clip(motorrbPower + (motorrbPower >= 0 ? MOTORRF_POWER_BOOST : -MOTORRF_POWER_BOOST), -maxPower, maxPower);
-            } 
+            }
             else {
                 motorrfPower = motorrbPower;
             }
             motorrf.setPower(motorrfPower);
-            
+
             // motorlb has MOTORLB_POWER_REDUCTION less power, but only if stick is being touched
             double motorlbPower;
             if (Math.abs(drive) > 0.01 || Math.abs(turn) > 0.01) {
@@ -65,20 +65,19 @@ public class TotalTeleOpv23 extends LinearOpMode {
                 motorlbPower = motorrbPower;
             }
             motorlb.setPower(motorlbPower);
-            double motorlfPower = Range.clip(drive + turn, -maxPower, maxPower);
-            motorlf.setPower(-motorlfPower);
+            motorlf.setPower(-motorlbPower);
 
             if(gamepad1.right_bumper){
                 motorlb.setPower(-0.5);
-                motorrf.setPower(-0.5);
-                motorrb.setPower(0.5);
+                motorrf.setPower(-0.8);
+                motorrb.setPower(0.8);
                 motorlf.setPower(-0.5);
             }
 
             if(gamepad1.left_bumper){
                 motorlb.setPower(0.5);
-                motorrf.setPower(0.5);
-                motorrb.setPower(-0.5);
+                motorrf.setPower(0.8);
+                motorrb.setPower(-0.8);
                 motorlf.setPower(0.5);
             }
 
