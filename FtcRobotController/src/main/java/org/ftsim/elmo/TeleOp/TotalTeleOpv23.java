@@ -55,17 +55,18 @@ public class TotalTeleOpv23 extends LinearOpMode {
             }
             motorrf.setPower(motorrfPower);
 
-            // motorlb has MOTORLB_POWER_REDUCTION less power, but only if stick is being touched
-            double motorlbPower;
-            if (Math.abs(drive) > 0.01 || Math.abs(turn) > 0.01) {
-                // Stick is being used: apply power reduction
+            if (Math.abs(turn) > 0.01) {
+                motorlbPower = motorrbPower;
+            } 
+            else if (Math.abs(drive) > 0.01) {
                 motorlbPower = Range.clip(motorrbPower - MOTORLB_POWER_REDUCTION, -maxPower, maxPower);
             } else {
-                // Stick not being touched: same power as right side
                 motorlbPower = motorrbPower;
             }
             motorlb.setPower(motorlbPower);
-            motorlf.setPower(-motorlbPower);
+            
+            double motorlfPower = Range.clip(drive + turn, -maxPower, maxPower);
+            motorlf.setPower(-motorlfPower);
 
             if(gamepad1.right_bumper){
                 motorlb.setPower(-0.5);
