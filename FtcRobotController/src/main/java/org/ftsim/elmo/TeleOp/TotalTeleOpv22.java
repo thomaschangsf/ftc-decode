@@ -42,17 +42,18 @@ public class TotalTeleOpv22 extends LinearOpMode {
 
             double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
             motorlb.setPower(motorlbPower);
+            motorlf.setPower(-motorlbPower);
 
             double rightPower;
             if (Math.abs(turn) < 0.01 && Math.abs(motorlbPower) > 0.01) {
 
-                rightPower = Range.clip(motorlbPower + 0.2, -maxPower, maxPower);
+                rightPower = Range.clip(motorlbPower + 0.1, -maxPower, maxPower);
             } else {
 
                 rightPower = Range.clip(drive - turn, -maxPower, maxPower);
             }
-            motorrb.setPower(rightPower);
-            motorrf.setPower(rightPower);
+            motorrb.setPower(rightPower);// no longer needs more power
+            motorrf.setPower(rightPower);// give more power and make sure it applies both ways
 
             if(gamepad1.right_bumper){
                 motorlb.setPower(-0.5);
