@@ -9,8 +9,6 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name = "TotalTeleOpv23", group = "TeleOp")
 public class TotalTeleOpv23 extends LinearOpMode {
 
-    // Power boost for motorrf (how much more power it gets than other motors)
-    // Change this value to adjust the power difference (e.g., 0.3, 0.5, 0.7, etc.)
     private static final double MOTORRF_POWER_BOOST = 0.5;
 
     private DcMotor motorlb;
