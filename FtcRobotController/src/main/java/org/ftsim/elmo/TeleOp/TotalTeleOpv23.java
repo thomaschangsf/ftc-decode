@@ -59,7 +59,7 @@ public class TotalTeleOpv23 extends LinearOpMode {
             if (Math.abs(turn) > 0.01) {
                 motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
             } 
-            else if (Math.abs(drive) > 0.01) {
+            else if (Math.abs(drive) > 0.01 && Math.abs(motorrbPower) > 0.5) {
                 motorlbPower = Range.clip(motorrbPower - MOTORLB_POWER_REDUCTION, -maxPower, maxPower);
             } else {
                 motorlbPower = motorrbPower;
