@@ -47,13 +47,11 @@ public class TotalTeleOpv23 extends LinearOpMode {
             motorrb.setPower(motorlbPower);
             
             double motorrfPower;
-
-            if (gamepad1.left_stick_y <= 0.1) {
+            
+            if (Math.abs(drive) > 0.01) {
                 motorrfPower = Range.clip(motorlbPower + (motorlbPower >= 0 ? MOTORRF_POWER_BOOST : -MOTORRF_POWER_BOOST), -maxPower, maxPower);
-            } 
-
-            else {
-                motorrfPower = -motorrfPower;
+            } else {
+                motorrfPower = 0;
             }
             motorrf.setPower(motorrfPower);
 
