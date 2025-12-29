@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name = "TotalTeleOpv23", group = "TeleOp")
 public class TotalTeleOpv23 extends LinearOpMode {
 
-    private static final double MOTORRF_POWER_BOOST = 0.5;
+    private static final double MOTORRF_POWER_BOOST = 2;
 
     private DcMotor motorlb;
     private DcMotor motorrb;
@@ -43,11 +43,10 @@ public class TotalTeleOpv23 extends LinearOpMode {
 
             double motorlbPower = Range.clip(drive + turn, -maxPower, maxPower);
             motorlb.setPower(motorlbPower);
-            motorlf.setPower(-motorlbPower);
             motorrb.setPower(motorlbPower);
-            
+
             double motorrfPower;
-            
+
             if (Math.abs(drive) > 0.01) {
                 motorrfPower = Range.clip(motorlbPower + (motorlbPower >= 0 ? MOTORRF_POWER_BOOST : -MOTORRF_POWER_BOOST), -maxPower, maxPower);
             } else {
