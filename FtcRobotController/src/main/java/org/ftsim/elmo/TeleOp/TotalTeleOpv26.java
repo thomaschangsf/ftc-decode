@@ -173,8 +173,19 @@ public class TotalTeleOpv26 extends LinearOpMode {
     private void initHuskyLens() {
         try {
             huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
+            
+            // Verify communication with HuskyLens
+            if (!huskyLens.knock()) {
+                telemetry.addData("HuskyLens", "Warning: Communication issue");
+            }
+            
+            // Select the tag recognition algorithm
             huskyLens.selectAlgorithm(HuskyLens.Algorithm.TAG_RECOGNITION);
-            telemetry.addData("HuskyLens", "Initialized");
+            
+            // Give the HuskyLens a moment to initialize the algorithm
+            sleep(500);
+            
+            telemetry.addData("HuskyLens", "Initialized - TAG_RECOGNITION mode");
         } catch (Exception e) {
             huskyLens = null;
             telemetry.addData("HuskyLens", "Failed to initialize: " + e.getMessage());
@@ -207,6 +218,26 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
     private void updateVisionTelemetry() {
         HuskyLens.Block block = getTargetTag();
+        
+        // Diagnostic: Show all detected blocks
+        if (huskyLens != null) {
+            HuskyLens.Block[] allBlocks = huskyLens.blocks();
+            telemetry.addLine("--- Diagnostic Info ---");
+            telemetry.addData("Total Blocks Detected", allBlocks.length);
+            if (allBlocks.length > 0) {
+                telemetry.addLine("All Detected Tag IDs:");
+                for (int i = 0; i < allBlocks.length; i++) {
+                    telemetry.addData(String.format("Block %d", i), 
+                        "ID: %d, Size: %dx%d, Pos: (%d,%d)", 
+                        allBlocks[i].id, 
+                        allBlocks[i].width, 
+                        allBlocks[i].height,
+                        allBlocks[i].x,
+                        allBlocks[i].y);
+                }
+            }
+            telemetry.addLine("");
+        }
 
         if (block == null) {
             telemetry.addLine("--- AprilTag Detection ---");
