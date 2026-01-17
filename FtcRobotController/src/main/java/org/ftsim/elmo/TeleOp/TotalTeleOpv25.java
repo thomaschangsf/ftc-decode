@@ -155,6 +155,7 @@ public class TotalTeleOpv25 extends LinearOpMode {
                 motorfw.setPower(1);
                 sleep(450);
                 motorfw.setPower(0);
+            }
         }
     }
 }
