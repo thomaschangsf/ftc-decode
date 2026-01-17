@@ -93,14 +93,14 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 motorlf.setPower(0);
             }
 
-            if (gamepad1.left_stick_y > 0.1) {
+            if (gamepad1.left_stick_y > 0.1 && gamepad1.square) {
                 motorlb.setPower(0.5);
                 motorrf.setPower(0.5);
                 motorrb.setPower(0.5);
                 motorlf.setPower(0.5);
             }
 
-            if (gamepad1.left_stick_y < -0.1) {
+            if (gamepad1.left_stick_y < -0.1 && gamepad1.square) {
                 motorlb.setPower(-0.5);
                 motorrf.setPower(-0.5);
                 motorrb.setPower(-0.5);
@@ -117,7 +117,7 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 motorfw.setPower(-1);
                 sleep(300);
                 motorfw.setPower(-0.62);
-                sleep(900);
+                sleep(850);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
@@ -135,14 +135,14 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
                 // BALL 3 1325 ms
                 motorfw.setPower(-0.62); //12.6 volts
-                sleep(850);
+                sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(1000);
+                sleep(650);
                 motorfw.setPower(1);
                 sleep(450);
                 motorfw.setPower(0);
@@ -158,7 +158,7 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(1000);
+                sleep(400);
                 motorfw.setPower(1);
                 sleep(450);
                 motorfw.setPower(0);
@@ -183,13 +183,13 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
     private HuskyLens.Block getTargetTag() {
         if (huskyLens == null) return null;
-        
+
         HuskyLens.Block[] blocks = huskyLens.blocks();
         if (blocks.length == 0) return null;
-        
+
         // Look for tags with id 3 or 6
         for (HuskyLens.Block block : blocks) {
-            if (block.id == 3 || block.id == 6) {
+            if (block.id == 1 || block.id == 2) {
                 return block;
             }
         }
@@ -198,23 +198,23 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
     private double calculateDistance(HuskyLens.Block block) {
         if (block == null) return -1.0;
-        
+
         double averagePixelSize = (block.width + block.height) / 2.0;
         double distance = (KNOWN_TAG_SIZE_INCHES * FOCAL_LENGTH_PIXELS) / averagePixelSize;
-        
+
         return distance;
     }
 
     private void updateVisionTelemetry() {
         HuskyLens.Block block = getTargetTag();
-        
+
         if (block == null) {
             telemetry.addLine("--- AprilTag Detection ---");
-            telemetry.addData("Tag ID 3 or 6", "Not detected");
+            telemetry.addData("Tag ID 1 or 2", "Not detected");
             telemetry.addData("Distance", "N/A");
         } else {
             double distance = calculateDistance(block);
-            
+
             telemetry.addLine("--- AprilTag Detection ---");
             telemetry.addData("Tag ID", block.id);
             telemetry.addData("Dimensions", "Width: %d px, Height: %d px", block.width, block.height);

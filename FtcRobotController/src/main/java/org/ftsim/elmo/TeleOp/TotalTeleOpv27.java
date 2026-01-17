@@ -95,14 +95,14 @@ public class TotalTeleOpv27 extends LinearOpMode {
                 motorlf.setPower(0);
             }
 
-            if (gamepad1.left_stick_y > 0.1) {
+            if (gamepad1.left_stick_y > 0.1 && gamepad1.square) {
                 motorlb.setPower(0.5);
                 motorrf.setPower(0.5);
                 motorrb.setPower(0.5);
                 motorlf.setPower(0.5);
             }
 
-            if (gamepad1.left_stick_y < -0.1) {
+            if (gamepad1.left_stick_y < -0.1 && gamepad1.square) {
                 motorlb.setPower(-0.5);
                 motorrf.setPower(-0.5);
                 motorrb.setPower(-0.5);
@@ -191,7 +191,7 @@ public class TotalTeleOpv27 extends LinearOpMode {
         
         // Look for tags with id 3 or 6
         for (HuskyLens.Block block : blocks) {
-            if (block.id == 3 || block.id == 6) {
+            if (block.id == 1 || block.id == 2) {
                 return block;
             }
         }
@@ -217,7 +217,7 @@ public class TotalTeleOpv27 extends LinearOpMode {
         
         if (block == null) {
             telemetry.addLine("--- AprilTag Detection ---");
-            telemetry.addData("Tag ID 3 or 6", "Not detected");
+            telemetry.addData("Tag ID 1 or 2", "Not detected");
             telemetry.addData("Distance", "N/A");
             telemetry.addData("Shoot Status", "No tag detected");
         } else {
