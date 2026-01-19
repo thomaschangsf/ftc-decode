@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv26", group = "TeleOp")
+@TeleOp(name = "TotalTeleOpv26 mk14", group = "TeleOp")
 public class TotalTeleOpv26 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
@@ -113,38 +113,39 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 rightShooterServo.setPosition(1);
                 motorfw.setPower(0);
 
-                //BALL 1 1250 m;
+                //BALL 1
                 motorfw.setPower(-1);
                 sleep(300);
                 motorfw.setPower(-0.62);
-                sleep(850);
-                leftShooterServo.setPosition(1); //open to shoot
-                rightShooterServo.setPosition(0);
-                sleep(325); //gives ball time to escape servo
-                leftShooterServo.setPosition(0);//close for next shot
-                rightShooterServo.setPosition(1);
-
-                // BALL 2 1025ms
-                motorfw.setPower(-0.62); //12.6 volts
-                sleep(850);
-                leftShooterServo.setPosition(1); //open to shoot
-                rightShooterServo.setPosition(0);
-                sleep(300); //gives ball time to escape servo
-                leftShooterServo.setPosition(0);//close for next shot
-                rightShooterServo.setPosition(1);
-
-                // BALL 3 1325 ms
-                motorfw.setPower(-0.62); //12.6 volts
                 sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
+                sleep(350); //gives ball time to escape servo
+                leftShooterServo.setPosition(0);//close for next shot
+                rightShooterServo.setPosition(1);
+
+                sleep(700);
+
+                //BALL 2
+                leftShooterServo.setPosition(1); //open to shoot
+                rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(650);
+                sleep(700);
+
+                //BALL 3
+                leftShooterServo.setPosition(1); //open to shoot
+                rightShooterServo.setPosition(0);
+                sleep(350); //gives ball time to escape servo
+                leftShooterServo.setPosition(0);//close for next shot
+                rightShooterServo.setPosition(1);
+
+                //STOP MECHANISM
+                sleep(400);
                 motorfw.setPower(1);
-                sleep(450);
+                sleep(200);
                 motorfw.setPower(0);
             }
             if (gamepad1.left_trigger > 0.1) {
@@ -154,13 +155,13 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
-                sleep(325); //gives ball time to escape servo
+                sleep(350); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
                 sleep(400);
                 motorfw.setPower(1);
-                sleep(450);
+                sleep(100);
                 motorfw.setPower(0);
             }
 
@@ -173,18 +174,18 @@ public class TotalTeleOpv26 extends LinearOpMode {
     private void initHuskyLens() {
         try {
             huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
-            
+
             // Verify communication with HuskyLens
             if (!huskyLens.knock()) {
                 telemetry.addData("HuskyLens", "Warning: Communication issue");
             }
-            
+
             // Select the tag recognition algorithm
             huskyLens.selectAlgorithm(HuskyLens.Algorithm.TAG_RECOGNITION);
-            
+
             // Give the HuskyLens a moment to initialize the algorithm
             sleep(500);
-            
+
             telemetry.addData("HuskyLens", "Initialized - TAG_RECOGNITION mode");
         } catch (Exception e) {
             huskyLens = null;
@@ -218,7 +219,7 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
     private void updateVisionTelemetry() {
         HuskyLens.Block block = getTargetTag();
-        
+
         // Diagnostic: Show all detected blocks
         if (huskyLens != null) {
             HuskyLens.Block[] allBlocks = huskyLens.blocks();
@@ -227,13 +228,13 @@ public class TotalTeleOpv26 extends LinearOpMode {
             if (allBlocks.length > 0) {
                 telemetry.addLine("All Detected Tag IDs:");
                 for (int i = 0; i < allBlocks.length; i++) {
-                    telemetry.addData(String.format("Block %d", i), 
-                        "ID: %d, Size: %dx%d, Pos: (%d,%d)", 
-                        allBlocks[i].id, 
-                        allBlocks[i].width, 
-                        allBlocks[i].height,
-                        allBlocks[i].x,
-                        allBlocks[i].y);
+                    telemetry.addData(String.format("Block %d", i),
+                            "ID: %d, Size: %dx%d, Pos: (%d,%d)",
+                            allBlocks[i].id,
+                            allBlocks[i].width,
+                            allBlocks[i].height,
+                            allBlocks[i].x,
+                            allBlocks[i].y);
                 }
             }
             telemetry.addLine("");
