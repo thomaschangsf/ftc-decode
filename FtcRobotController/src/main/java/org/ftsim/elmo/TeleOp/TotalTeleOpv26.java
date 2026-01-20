@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv26 mk14", group = "TeleOp")
+@TeleOp(name = "TotalTeleOpv26 mk16", group = "TeleOp")
 public class TotalTeleOpv26 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
@@ -95,14 +95,14 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
             if (gamepad1.left_stick_y > 0.1 && gamepad1.square) {
                 motorlb.setPower(0.5);
-                motorrf.setPower(0.5);
+                motorrf.setPower(-0.5);
                 motorrb.setPower(0.5);
                 motorlf.setPower(0.5);
             }
 
             if (gamepad1.left_stick_y < -0.1 && gamepad1.square) {
                 motorlb.setPower(-0.5);
-                motorrf.setPower(-0.5);
+                motorrf.setPower(0.5);
                 motorrb.setPower(-0.5);
                 motorlf.setPower(-0.5);
             }
@@ -115,9 +115,9 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
                 //BALL 1
                 motorfw.setPower(-1);
-                sleep(300);
+                sleep(275);
                 motorfw.setPower(-0.62);
-                sleep(900);
+                sleep(800);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(350); //gives ball time to escape servo
@@ -133,7 +133,7 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(700);
+                sleep(675);
 
                 //BALL 3
                 leftShooterServo.setPosition(1); //open to shoot
@@ -143,9 +143,9 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 rightShooterServo.setPosition(1);
 
                 //STOP MECHANISM
-                sleep(400);
+                sleep(500);
                 motorfw.setPower(1);
-                sleep(200);
+                sleep(300);
                 motorfw.setPower(0);
             }
             if (gamepad1.left_trigger > 0.1) {
@@ -161,7 +161,7 @@ public class TotalTeleOpv26 extends LinearOpMode {
 
                 sleep(400);
                 motorfw.setPower(1);
-                sleep(100);
+                sleep(300);
                 motorfw.setPower(0);
             }
 
