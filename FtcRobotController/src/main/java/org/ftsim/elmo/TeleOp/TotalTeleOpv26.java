@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv26 mk16", group = "TeleOp")
+@TeleOp(name = "TotalTeleOpv26 mk17", group = "TeleOp")
 public class TotalTeleOpv26 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
@@ -120,7 +120,7 @@ public class TotalTeleOpv26 extends LinearOpMode {
                 sleep(800);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
-                sleep(350); //gives ball time to escape servo
+                sleep(325); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
