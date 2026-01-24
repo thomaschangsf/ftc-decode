@@ -1,13 +1,13 @@
 package org.ftsim.elmo;
 
-import com.qualcomm.hardware.dfrobot.HuskyLens; 
+import com.qualcomm.hardware.dfrobot.HuskyLens;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv27", group = "TeleOp")
+@TeleOp(name = "TotalTeleOpv27 mk3", group = "TeleOp")
 public class TotalTeleOpv27 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
@@ -25,8 +25,6 @@ public class TotalTeleOpv27 extends LinearOpMode {
 
     private static final double KNOWN_TAG_SIZE_INCHES = 2.0;
     private static final double FOCAL_LENGTH_PIXELS = 500.0;
-    
-    private static final double SHOOT_DISTANCE_THRESHOLD_INCHES = 2.0;
 
     @Override
     public void runOpMode() {
@@ -38,7 +36,6 @@ public class TotalTeleOpv27 extends LinearOpMode {
         leftShooterServo = hardwareMap.get(Servo.class, "leftShooterServo");
         rightShooterServo = hardwareMap.get(Servo.class, "rightShooterServo");
 
-        initHuskyLens();
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -97,14 +94,14 @@ public class TotalTeleOpv27 extends LinearOpMode {
 
             if (gamepad1.left_stick_y > 0.1 && gamepad1.square) {
                 motorlb.setPower(0.5);
-                motorrf.setPower(0.5);
+                motorrf.setPower(-0.5);
                 motorrb.setPower(0.5);
                 motorlf.setPower(0.5);
             }
 
             if (gamepad1.left_stick_y < -0.1 && gamepad1.square) {
                 motorlb.setPower(-0.5);
-                motorrf.setPower(-0.5);
+                motorrf.setPower(0.5);
                 motorrb.setPower(-0.5);
                 motorlf.setPower(-0.5);
             }
@@ -115,38 +112,46 @@ public class TotalTeleOpv27 extends LinearOpMode {
                 rightShooterServo.setPosition(1);
                 motorfw.setPower(0);
 
-                //BALL 1 1250 m;
+                //BALL 1
                 motorfw.setPower(-1);
-                sleep(300);
+                sleep(275);
                 motorfw.setPower(-0.62);
-                sleep(900);
+                sleep(800);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                // BALL 2 1025ms
-                motorfw.setPower(-0.62); //12.6 volts
-                sleep(850);
-                leftShooterServo.setPosition(1); //open to shoot
-                rightShooterServo.setPosition(0);
-                sleep(300); //gives ball time to escape servo
-                leftShooterServo.setPosition(0);//close for next shot
-                rightShooterServo.setPosition(1);
+                sleep(700);
 
-                // BALL 3 1325 ms
-                motorfw.setPower(-0.62); //12.6 volts
-                sleep(850);
+                //BALL 2
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(1000);
+                sleep(700);
+
+                //BALL 3
+                leftShooterServo.setPosition(1); //open to shoot
+                rightShooterServo.setPosition(0);
+                sleep(350); //gives ball time to escape servo
+                leftShooterServo.setPosition(0);//close for next shot
+                rightShooterServo.setPosition(1);
+
+                //STOP MECHANISM
+                sleep(500);
                 motorfw.setPower(1);
-                sleep(450);
+                sleep(300);
+                motorfw.setPower(0);
+            }
+            if (gamepad1.triangle) {
+                motorfw.setPower(1);
+                sleep(1000);
+                motorfw.setPower(-0.8);
+                sleep(380);
                 motorfw.setPower(0);
             }
             if (gamepad1.left_trigger > 0.1) {
@@ -156,88 +161,17 @@ public class TotalTeleOpv27 extends LinearOpMode {
                 sleep(900);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
-                sleep(325); //gives ball time to escape servo
+                sleep(350); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(1000);
+                sleep(400);
                 motorfw.setPower(1);
-                sleep(450);
+                sleep(300);
                 motorfw.setPower(0);
             }
 
-            // Update vision telemetry
-            updateVisionTelemetry();
             telemetry.update();
-        }
-    }
-
-    private void initHuskyLens() {
-        try {
-            huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
-            huskyLens.selectAlgorithm(HuskyLens.Algorithm.TAG_RECOGNITION);
-            telemetry.addData("HuskyLens", "Initialized");
-        } catch (Exception e) {
-            huskyLens = null;
-            telemetry.addData("HuskyLens", "Failed to initialize: " + e.getMessage());
-        }
-    }
-
-    private HuskyLens.Block getTargetTag() {
-        if (huskyLens == null) return null;
-        
-        HuskyLens.Block[] blocks = huskyLens.blocks();
-        if (blocks.length == 0) return null;
-        
-        // Look for tags with id 3 or 6
-        for (HuskyLens.Block block : blocks) {
-            if (block.id == 1 || block.id == 2) {
-                return block;
-            }
-        }
-        return null;
-    }
-
-    private double calculateDistance(HuskyLens.Block block) {
-        if (block == null) return -1.0;
-        
-        double averagePixelSize = (block.width + block.height) / 2.0;
-        double distance = (KNOWN_TAG_SIZE_INCHES * FOCAL_LENGTH_PIXELS) / averagePixelSize;
-        
-        return distance;
-    }
-
-    private boolean isWithinShootRange(double distance) {
-        if (distance < 0) return false; // Invalid distance
-        return distance <= SHOOT_DISTANCE_THRESHOLD_INCHES;
-    }
-
-    private void updateVisionTelemetry() {
-        HuskyLens.Block block = getTargetTag();
-        
-        if (block == null) {
-            telemetry.addLine("--- AprilTag Detection ---");
-            telemetry.addData("Tag ID 1 or 2", "Not detected");
-            telemetry.addData("Distance", "N/A");
-            telemetry.addData("Shoot Status", "No tag detected");
-        } else {
-            double distance = calculateDistance(block);
-            boolean goodToShoot = isWithinShootRange(distance);
-            
-            telemetry.addLine("--- AprilTag Detection ---");
-            telemetry.addData("Tag ID", block.id);
-            telemetry.addData("Dimensions", "Width: %d px, Height: %d px", block.width, block.height);
-            telemetry.addData("Position", "X: %d, Y: %d", block.x, block.y);
-            telemetry.addData("Distance", "%.2f inches", distance);
-            telemetry.addLine("");
-            
-            // Display shoot status prominently
-            if (goodToShoot) {
-                telemetry.addData(">>> SHOOT STATUS <<<", "GOOD TO SHOOT!");
-            } else {
-                telemetry.addData(">>> SHOOT STATUS <<<", "Too far - move closer");
-                telemetry.addData("Target Distance", "%.2f inches or less", SHOOT_DISTANCE_THRESHOLD_INCHES);
-            }
         }
     }
 }
