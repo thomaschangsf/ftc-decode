@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="BaseShooterV4", group="Linear Opmode")
+@Autonomous(name="BaseShooterV4 mk2", group="Linear Opmode")
 public class BaseShooterV4 extends LinearOpMode
 {
     DcMotor motorlb;
@@ -37,28 +37,49 @@ public class BaseShooterV4 extends LinearOpMode
         motorfw.setPower(0);
 
         //BALL 1
-        motorfw.setPower(-1);
-        sleep(275);
-        motorfw.setPower(-0.63);
-        sleep(800);
+        // motorfw.setPower(-1);
+        //sleep(300);
+        motorfw.setPower(-0.62);
+        sleep(1100);
         leftShooterServo.setPosition(1); //open to shoot
         rightShooterServo.setPosition(0);
         sleep(325); //gives ball time to escape servo
         leftShooterServo.setPosition(0);//close for next shot
         rightShooterServo.setPosition(1);
 
-        sleep(700);
+
+        //STOP MECHANISM
+        sleep(500);
+        motorfw.setPower(1);
+        sleep(300);
+        motorfw.setPower(0);
+
+        sleep(4000);
 
         //BALL 2
+        //motorfw.setPower(-1);
+        //sleep(300);
+        motorfw.setPower(-0.62);
+        sleep(1150);
         leftShooterServo.setPosition(1); //open to shoot
         rightShooterServo.setPosition(0);
-        sleep(325); //gives ball time to escape servo
+        sleep(300); //gives ball time to escape servo
         leftShooterServo.setPosition(0);//close for next shot
         rightShooterServo.setPosition(1);
 
-        sleep(700);
+        //STOP MECHANISM
+        sleep(500);
+        motorfw.setPower(1);
+        sleep(300);
+        motorfw.setPower(0);
+
+        sleep(4000);
 
         //BALL 3
+        //motorfw.setPower(-1);
+        //sleep(300);
+        motorfw.setPower(-0.62);
+        sleep(1175);
         leftShooterServo.setPosition(1); //open to shoot
         rightShooterServo.setPosition(0);
         sleep(350); //gives ball time to escape servo
@@ -71,14 +92,18 @@ public class BaseShooterV4 extends LinearOpMode
         sleep(300);
         motorfw.setPower(0);
 
-        motorrb.setPower(-1);
-        motorlb.setPower(-1);
-        sleep(1000);
-        motorrb.setPower(0);
-        motorlb.setPower(0);
+        //motorrb.setPower(-1);
+        //motorlb.setPower(-1);
+        //sleep(1000);
+        //motorrb.setPower(0);
+        //motorlb.setPower(0);
 
-        motorfw.setPower(-0.62);
-        sleep(6000);
-        motorfw.setPower(0);
+        //motorfw.setPower(-0.62);
+        //sleep(6000);
+        //    motorfw.setPower(0);
+
+        //  motorfw.setPower(1);
+        //sleep(600);
+        //motorfw.setPower(0);
     }
 }
