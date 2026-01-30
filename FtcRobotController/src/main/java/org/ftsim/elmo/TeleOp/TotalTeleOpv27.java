@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name = "TotalTeleOpv27 mk3", group = "TeleOp")
+@TeleOp(name = "TotalTeleOpv27 mk20", group = "TeleOp")
 public class TotalTeleOpv27 extends LinearOpMode {
 
     private static final double MOTORRF_POWER_BOOST = 2;
@@ -107,31 +107,35 @@ public class TotalTeleOpv27 extends LinearOpMode {
             }
 
             //orignal loop time 9 secs
+            //Inaccurate first iteration of this: 3.5 seconnds
+            //70-80% accuracy, 3.325 for just the 3 balls, 4.225 with stop Mechanism
             if (gamepad1.right_trigger > 0.1) { //Shooting loop
                 leftShooterServo.setPosition(0);
                 rightShooterServo.setPosition(1);
                 motorfw.setPower(0);
 
                 //BALL 1
-                motorfw.setPower(-1);
-                sleep(275);
-                motorfw.setPower(-0.62);
-                sleep(800);
+                //motorfw.setPower(-1);
+                //sleep(275);
+                motorfw.setPower(-0.6);
+                sleep(1150);
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
                 sleep(325); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
-                sleep(700);
+                motorfw.setPower(-0.59);
+                sleep(650);
 
                 //BALL 2
                 leftShooterServo.setPosition(1); //open to shoot
                 rightShooterServo.setPosition(0);
-                sleep(325); //gives ball time to escape servo
+                sleep(275); //gives ball time to escape servo
                 leftShooterServo.setPosition(0);//close for next shot
                 rightShooterServo.setPosition(1);
 
+                motorfw.setPower(-0.59);
                 sleep(700);
 
                 //BALL 3
@@ -142,7 +146,7 @@ public class TotalTeleOpv27 extends LinearOpMode {
                 rightShooterServo.setPosition(1);
 
                 //STOP MECHANISM
-                sleep(500);
+                sleep(600);
                 motorfw.setPower(1);
                 sleep(300);
                 motorfw.setPower(0);

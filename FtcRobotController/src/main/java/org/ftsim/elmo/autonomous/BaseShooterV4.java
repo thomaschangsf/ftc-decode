@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="BaseShooterV4 mk2", group="Linear Opmode")
+@Autonomous(name="BaseShooterV4 mk10", group="Linear Opmode")
 public class BaseShooterV4 extends LinearOpMode
 {
     DcMotor motorlb;
@@ -39,8 +39,8 @@ public class BaseShooterV4 extends LinearOpMode
         //BALL 1
         // motorfw.setPower(-1);
         //sleep(300);
-        motorfw.setPower(-0.62);
-        sleep(1100);
+        motorfw.setPower(-0.6);
+        sleep(1175);
         leftShooterServo.setPosition(1); //open to shoot
         rightShooterServo.setPosition(0);
         sleep(325); //gives ball time to escape servo
@@ -92,11 +92,13 @@ public class BaseShooterV4 extends LinearOpMode
         sleep(300);
         motorfw.setPower(0);
 
-        //motorrb.setPower(-1);
-        //motorlb.setPower(-1);
-        //sleep(1000);
-        //motorrb.setPower(0);
-        //motorlb.setPower(0);
+        sleep(4000);
+
+        motorrb.setPower(-1);
+        motorlb.setPower(-1);
+        sleep(1000);
+        motorrb.setPower(0);
+        motorlb.setPower(0);
 
         //motorfw.setPower(-0.62);
         //sleep(6000);
